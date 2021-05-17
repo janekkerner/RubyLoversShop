@@ -1,0 +1,15 @@
+{
+  "name": "RubyLoversShop",
+  "description": "Course boostrap app",
+  "website": "https://devqahub.com",
+  "repository": "https://github.com/DevQAHub/RubyLoversShop",
+  "scripts": {
+    "postdeploy": "bundle exec bin/rails db:migrate"
+  },
+  "env": {
+    "RAILS_ENV": "production"
+  },
+  "addons": [
+    "heroku-postgresql"
+  ]
+}

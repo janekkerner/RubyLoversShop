@@ -1,0 +1,27 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - db/**/**
+    - features/support/env.rb
+    - config/**/**
+    - test/**/**
+    - bin/**/**
+    - node_modules/**/**
+Layout/LineLength:
+  Max: 120
+Metrics/ClassLength:
+  Max: 200
+Metrics/MethodLength:
+  Enabled: false
+Style/BlockComments:
+  Enabled: false
+Bundler/OrderedGems:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
