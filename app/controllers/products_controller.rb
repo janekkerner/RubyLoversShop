@@ -1,7 +1,12 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Product.all
+    if params[:category]
+      @products = Product.by_categories(params[:category])
+    else
+      @products = Product.all
+      render 'pages/home'
+    end
   end
 
   def new

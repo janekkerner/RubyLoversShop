@@ -1,6 +1,7 @@
 <h3 class="my-4">Categories</h4>
 <div class="list-group">
-  <a href="#" class="list-group-item">Category 1</a>
-  <a href="#" class="list-group-item">Category 2</a>
-  <a href="#" class="list-group-item">Category 3</a>
+  <%= link_to "Category 1", products_index_path( :category => 'first category'), :class => 'list-group-item' %>
+  <%= link_to "Category 2", products_index_path( :category => 'second category'), :class => 'list-group-item' %>
+  <%= link_to "Category 3", products_index_path( :category => 'third category'), :class => 'list-group-item' %>
+  <%= link_to "All products", products_index_path, :class => 'list-group-item' %>
 </div>
