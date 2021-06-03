@@ -2,6 +2,6 @@
 
 class PagesController < ApplicationController
   def home
-    @products = Product.order('created_at ASC')
+    render :home, locals: { products: Product.order('created_at ASC') }
   end
 end
