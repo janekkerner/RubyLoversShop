@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Products", type: :system do
+  
   let!(:product) { create(:product) }
   let!(:product2) { create(:product) }
 
