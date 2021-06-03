@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 class ProductsController < ApplicationController
   def index
-      @products = Product.all.order('created_at ASC')
-      render 'pages/home'
+    @products = Product.order('created_at ASC')
   end
 
   def new
