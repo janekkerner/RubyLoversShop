@@ -1,12 +1,7 @@
 class ProductsController < ApplicationController
-
   def index
-    if params[:category]
-      @products = Product.by_categories(params[:category])
-    else
-      @products = Product.all
+      @products = Product.all.order('created_at ASC')
       render 'pages/home'
-    end
   end
 
   def new

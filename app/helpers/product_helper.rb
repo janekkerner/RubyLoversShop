@@ -3,7 +3,7 @@ module ProductHelper
     if product.image.attached?
       product.image
     else
-      "http://placehold.it/700x700"
+      'http://placehold.it/700x700'
     end
   end
 end
