@@ -6,12 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
-Product.create(name: "Product 1", price: 999)
-Product.create(name: "Product 2", price: 888)
-Product.create(name: "Product 3", price: 777)
-Product.create(name: "Product 4", price: 666)
-
 Category.create(name: "Category 1")
 Category.create(name: "Category 2")
-Category.create(name: "Category 3")
+
+Product.create(name: "Product 1", price: 999, category_id: 1)
+Product.create(name: "Product 2", price: 888, category_id: 2)
+Product.create(name: "Product 3", price: 777, category_id: 1)
+Product.create(name: "Product 4", price: 666, category_id: 2)
