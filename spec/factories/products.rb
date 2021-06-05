@@ -4,5 +4,6 @@ FactoryBot.define do
   factory :product do
     sequence(:name) { |n| "Product no. #{n}" }
     price { '9.99' }
+    association :category
   end
 end

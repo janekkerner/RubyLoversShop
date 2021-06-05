@@ -1,7 +1,7 @@
 <h3 class="my-4">Categories</h4>
 <div class="list-group">
   <% categories.each do |category| %>
-    <%= link_to "#{category.name}", home_path(category_id: category.id ), class: 'list-group-item' %>
+    <%= link_to "#{category.name}", root_path(category_id: category.id ), class: 'list-group-item' %>
   <% end %>
-  <%= link_to "All products", home_path, class: 'list-group-item' %>
+  <%= link_to "All products", root_path, class: 'list-group-item' %>
 </div>
