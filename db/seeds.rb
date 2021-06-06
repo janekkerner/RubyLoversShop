@@ -5,11 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+5.times do |n|
+  Category.where(name: "Category #{n + 1}").first_or_create(name: "Category #{n + 1}")
+end
 
-Category.create(name: "Category 1")
-Category.create(name: "Category 2")
-
-Product.create(name: "Product 1", price: 999, category_id: 1)
-Product.create(name: "Product 2", price: 888, category_id: 2)
-Product.create(name: "Product 3", price: 777, category_id: 1)
-Product.create(name: "Product 4", price: 666, category_id: 2)
+15.times do |n|
+  Product.where(name: "Product #{n + 1}").first_or_create(name: "Product #{n + 1}", price: ((n + 1) * 111), category_id: rand(1..5))
+end
