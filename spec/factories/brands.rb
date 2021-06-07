@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :brand do
-    brand_name { "MyString" }
+    sequence(:brand_name) { |n| "Brand #{n}" }
   end
 end
