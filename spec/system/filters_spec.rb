@@ -28,7 +28,7 @@ RSpec.describe 'Filters', type: :system do
     end
   end
 
-  describe "when user is selecting brand" do
+  describe 'when user is selecting brand' do
     it 'see only products from selected brand' do
       visit root_path
       click_link brand.brand_name.to_s
@@ -42,14 +42,15 @@ RSpec.describe 'Filters', type: :system do
     end
   end
 
-  describe "when user is selecting category and brand" do
-    it "see only products that belongs to selected category and brand" do
+  describe 'when user is selecting category and brand' do
+    it 'see only products that belongs to selected category and brand' do
       visit root_path
       click_link category.name.to_s
       click_link brand.brand_name.to_s
       expect(page).to have_text(product.name)
     end
-    it "doesnt see products that belongs to other category or brand" do
+
+    it 'doesnt see products that belongs to other category or brand' do
       visit root_path
       click_link category.name.to_s
       click_link brand.brand_name.to_s

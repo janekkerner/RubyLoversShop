@@ -3,7 +3,7 @@
 class PagesController < ApplicationController
   def home
     @filters = {}
-    @filters[:category_id] =  params[:category_id] if params[:category_id].present?
+    @filters[:category_id] = params[:category_id] if params[:category_id].present?
     @filters[:brand_id] = params[:brand_id] if params[:brand_id].present?
     @categories = Category.all
     @brands = Brand.all
@@ -19,7 +19,7 @@ class PagesController < ApplicationController
       products = Product.all
       products = products.with_category(@filters[:category_id]) if @filters[:category_id].present?
       products = products.with_brand(@filters[:brand_id]) if @filters[:brand_id].present?
-      return products.order('created_at DESC')
+      products.order('created_at DESC')
     end
   end
 end
