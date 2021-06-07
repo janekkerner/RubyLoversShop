@@ -1,7 +1,13 @@
-<h3 class="my-4">Categories</h4>
+<h3 class="my-4">Categories</h3>
 <div class="list-group">
   <% categories.each do |category| %>
-    <%= link_to "#{category.name}", root_path(category_id: category.id ), class: 'list-group-item' %>
+    <%= link_to "#{category.name}", root_path(@filters.merge(category_id: category.id)), class: 'list-group-item' %>
   <% end %>
-  <%= link_to "All products", root_path, class: 'list-group-item' %>
 </div>
+<h3 class="my-4">Brands</h3>
+<div class="list-group">
+  <% brands.each do |brand| %>
+    <%= link_to "#{brand.brand_name}", root_path(@filters.merge(brand_id: brand.id)), class: 'list-group-item' %>
+  <% end %>
+</div>
+<%= button_to 'Reset filters', root_path(@filters.merge(category_id: "", brand_id: "")), class: "btn btn-danger"  %>
