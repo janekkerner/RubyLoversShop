@@ -2,7 +2,9 @@
 
 class ProductsController < ApplicationController
   def index
-    @products = Product.order('created_at ASC')
+    @q = Product.ransack(params[:q])
+    @products = @q.result.includes(:category, :brand).order('created_at DESC')
+    render :index, locals: { products: @products }
   end
 
   def new
@@ -17,6 +19,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :price, :image)
+    params.require(:product).permit(:name, :price, :image, :category_id, :brand_id)
   end
 end

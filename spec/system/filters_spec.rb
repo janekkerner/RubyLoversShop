@@ -17,13 +17,15 @@ RSpec.describe 'Filters', type: :system do
   describe 'when user is selecting category' do
     it 'see only products from selected category' do
       visit root_path
-      click_link category.name.to_s
+      select category.name.to_s, from: 'q_category_name_eq'
+      click_button 'Filter'
       expect(page).to have_text(product.name)
     end
 
     it 'doesnt see products from other categories' do
       visit root_path
-      click_link category.name.to_s
+      select category.name.to_s, from: 'q_category_name_eq'
+      click_button 'Filter'
       expect(page).not_to have_text(product2.name)
     end
   end
@@ -31,13 +33,15 @@ RSpec.describe 'Filters', type: :system do
   describe 'when user is selecting brand' do
     it 'see only products from selected brand' do
       visit root_path
-      click_link brand.brand_name.to_s
+      select brand.brand_name.to_s, from: 'q_brand_brand_name_eq'
+      click_button 'Filter'
       expect(page).to have_text(product.name)
     end
 
     it 'doesnt see products from other brands' do
       visit root_path
-      click_link brand.brand_name.to_s
+      select brand.brand_name.to_s, from: 'q_brand_brand_name_eq'
+      click_button 'Filter'
       expect(page).not_to have_text(product2.name)
     end
   end
@@ -45,15 +49,17 @@ RSpec.describe 'Filters', type: :system do
   describe 'when user is selecting category and brand' do
     it 'see only products that belongs to selected category and brand' do
       visit root_path
-      click_link category.name.to_s
-      click_link brand.brand_name.to_s
+      select category.name.to_s, from: 'q_category_name_eq'
+      select brand.brand_name.to_s, from: 'q_brand_brand_name_eq'
+      click_button 'Filter'
       expect(page).to have_text(product.name)
     end
 
     it 'doesnt see products that belongs to other category or brand' do
       visit root_path
-      click_link category.name.to_s
-      click_link brand.brand_name.to_s
+      select category.name.to_s, from: 'q_category_name_eq'
+      select brand.brand_name.to_s, from: 'q_brand_brand_name_eq'
+      click_button 'Filter'
       expect(page).not_to have_text(product2.name)
     end
   end
