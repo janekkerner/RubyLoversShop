@@ -1,7 +1,12 @@
-<h3 class="my-4">Categories</h4>
-<div class="list-group">
-  <% categories.each do |category| %>
-    <%= link_to "#{category.name}", root_path(category_id: category.id ), class: 'list-group-item' %>
-  <% end %>
-  <%= link_to "All products", root_path, class: 'list-group-item' %>
-</div>
+<h3 class="my-4">Filters:</h3>
+<%= search_form_for @q do |f| %>
+  <div class="form-group">
+    <%= f.label :category_name_eq, "Category:" %>
+    <%= f.collection_select :category_name_eq, Category.all, :name, :name, { include_blank: true }, { class: "form-control w-75" } %>
+  </div>
+  <div class="form-group">
+    <%= f.label :brand_brand_name_eq, "Brand:" %>
+    <%= f.collection_select :brand_brand_name_eq, Brand.all, :brand_name, :brand_name, { include_blank: true }, { class: "form-control w-75" } %>
+  </div>
+  <%= f.submit "Filter", class: "btn btn-primary w-50" %>
+<% end %>
