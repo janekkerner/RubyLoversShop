@@ -14,7 +14,7 @@ module Admin
 
     def check_user
       if user_signed_in?
-        flash[:alert] = 'You are not authorize'
+        flash[:alert] = 'You are not authorize.'
         redirect_to root_path
       end
     end
