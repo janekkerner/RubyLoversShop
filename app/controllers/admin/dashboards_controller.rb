@@ -7,8 +7,7 @@ module Admin
 
     layout 'dashboard'
 
-    def index
-    end
+    def index; end
 
     private
 

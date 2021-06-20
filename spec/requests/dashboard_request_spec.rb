@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Dashboards", type: :request do
+RSpec.describe 'Dashboards', type: :request do
   let!(:admin) { create(:admin_user) }
   let!(:user) { create(:user) }
 
-  describe "GET /admin" do
-    it "redirects to admin log in" do
+  describe 'GET /admin' do
+    it 'redirects to admin log in' do
       get admin_path
       expect(response).to have_http_status(:redirect)
     end
