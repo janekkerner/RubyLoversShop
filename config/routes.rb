@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/', to: 'dashboards#index'
+    get '/dashboard', to: 'dashboards#index'
   end
   post '/', to: 'pages#home'
   root to: "pages#home"
