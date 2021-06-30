@@ -11,12 +11,7 @@
   </thead>
   <tbody>
   <% products.each do |product| %>
-    <tr>
-      <td><%= product.id %></td>
-      <td><%= image_tag product_image_exist?(product), size: "150" %></td>
-      <td><%= product.name %></td>
-      <td><%= product.price %></td>
-    </tr>
+    <%= render partial: 'admin/dashboards/product', locals: { product: product } %>
   <% end %>
   </tbody>
 </table>
