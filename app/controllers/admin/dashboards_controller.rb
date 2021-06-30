@@ -8,8 +8,7 @@ module Admin
     layout 'dashboard'
 
     def index
-      @q = Product.ransack(params[:q])
-      @products = @q.result.includes(:category).includes(:brand).order('created_at DESC')
+      @products = Product.all
       render :index, locals: { products: @products }
     end
 
