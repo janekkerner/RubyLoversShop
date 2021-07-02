@@ -3,4 +3,9 @@
   <td><%= image_tag product_image_exist?(product), size: "150" %></td>
   <td><%= product.name %></td>
   <td><%= product.price %></td>
+  <% if product.brand %>
+    <td><%= product.brand.brand_name %></td>
+  <% else %>
+    <td>No brand</td>
+  <% end %>
 </tr>

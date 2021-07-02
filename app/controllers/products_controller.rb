@@ -7,15 +7,6 @@ class ProductsController < ApplicationController
     render :index, locals: { products: @products }
   end
 
-  def new
-    @product = Product.new
-  end
-
-  def create
-    @product = Product.build(product_params)
-    @product.save
-  end
-
   private
 
   def product_params
