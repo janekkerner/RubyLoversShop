@@ -4,6 +4,7 @@ class Product < ApplicationRecord
   has_one_attached :image
 
   validates :name, presence: true
+  validates :price, presence: true
 
   belongs_to :category
   belongs_to :brand, optional: true

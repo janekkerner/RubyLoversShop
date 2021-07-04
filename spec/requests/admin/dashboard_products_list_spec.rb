@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Dashboards', type: :request do
+RSpec.describe 'Admin::Dashboards', type: :request do
   let!(:admin) { create(:admin_user) }
   let!(:product) { create(:product) }
 
