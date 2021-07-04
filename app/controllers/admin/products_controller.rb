@@ -21,6 +21,14 @@ module Admin
       end
     end
 
+    def destroy
+      @product = Product.find(params[:id])
+      if @product.destroy
+        flash[:success] = "Product with ID: #{params[:id]} has been deleted"
+        redirect_to admin_path
+      end
+    end
+    
     private
 
     def product_params
