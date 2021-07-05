@@ -25,8 +25,10 @@ module Admin
       @product = Product.find(params[:id])
       if @product.destroy
         flash[:success] = "Product with ID: #{params[:id]} has been deleted"
-        redirect_to admin_path
+      else
+        flash[:error] = 'There was an error. Desired product has not been deleted'
       end
+      redirect_to admin_path
     end
 
     private
