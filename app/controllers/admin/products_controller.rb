@@ -23,15 +23,16 @@ module Admin
     end
 
     def edit
+      render :edit, locals: { product: @product}
     end
 
     def update
-      if product.update_all(product_params)
+      if @product.update(product_params)
         flash[:success] = "Product with ID: #{params[:id]} has been updated"
-        redirect_to admin_path
+        redirect_to edit_admin_product_path(@product.id)
       else
-        flash[:error] = "There was an error. Your product was not updated"
-        render :edit
+        flash[:error] = @product.errors.full_messages.to_sentence
+        render :edit, locals: { product: @product }
       end
     end
 

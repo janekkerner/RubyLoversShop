@@ -5,5 +5,10 @@
   <td><%= product.name %></td>
   <td><%= product.price %></td>
   <td><%= presenter.show_brand %></td>
-  <td><%= link_to "Delete", admin_product_path(product), method: :delete, id: "destroy-product-#{product.id}", class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %></td>
+  <td>
+    <div class="btn-group-vertical">
+      <%= link_to "Delete", admin_product_path(product), method: :delete, id: "destroy-product-#{product.id}", class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+      <%= link_to "Update", edit_admin_product_path(product), id: "update-product-#{product.id}", class: 'btn btn-secondary' %>
+    </div>
+  </td>
 </tr>
