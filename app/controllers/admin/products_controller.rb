@@ -28,7 +28,7 @@ module Admin
         redirect_to admin_path
       end
     end
-    
+
     private
 
     def product_params
