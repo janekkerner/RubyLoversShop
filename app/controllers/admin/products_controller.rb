@@ -3,7 +3,7 @@
 module Admin
   class ProductsController < ApplicationController
     before_action :authenticate_admin_user!
-    before_action :set_product, only: [:edit, :update, :destroy]
+    before_action :set_product, only: %i[edit update destroy]
 
     layout 'dashboard'
 
@@ -23,7 +23,7 @@ module Admin
     end
 
     def edit
-      render :edit, locals: { product: @product}
+      render :edit, locals: { product: @product }
     end
 
     def update
