@@ -5,18 +5,18 @@ require 'rails_helper'
 RSpec.describe 'Admin::Products#update', type: :system do
   let!(:product) { create(:product) }
   let!(:admin) { create(:admin_user) }
-  let!(:category) { create(:category) }
-  let!(:brand) { create(:brand) }
 
   before do
     driven_by(:rack_test)
   end
 
-  before do
-    sign_in admin
-  end
-
   describe 'when admin is visiting dashboard' do
+    before do
+      sign_in admin
+      create(:category)
+      create(:brand)
+    end
+
     it 'can get page to update choosen product' do
       visit admin_path
       click_link 'Update', id: "update-product-#{product.id}"
