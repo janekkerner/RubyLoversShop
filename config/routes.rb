@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/', to: 'dashboards#index'
     get '/dashboard', to: 'dashboards#index'
+    resources :products
   end
+  
   post '/', to: 'pages#home'
   root to: "pages#home"
 end

@@ -7,7 +7,10 @@ module Admin
 
     layout 'dashboard'
 
-    def index; end
+    def index
+      @products = Product.all.order('created_at DESC')
+      render :index, locals: { products: @products }
+    end
 
     private
 
