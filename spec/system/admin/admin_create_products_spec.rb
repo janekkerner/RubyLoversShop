@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Admin::Products', type: :system do
+RSpec.describe 'Admin::Products#create', type: :system do
   let!(:admin) { create(:admin_user) }
   let!(:product) { create(:product) }
   let!(:category) { create(:category) }
@@ -36,7 +36,7 @@ RSpec.describe 'Admin::Products', type: :system do
       attach_file 'image', 'app/assets/images/product_placeholder.jpg'
       select category.name, from: 'Category:'
       select brand.brand_name, from: 'Brand:'
-      click_button 'Create Product'
+      click_button 'Create product'
       expect(page).to have_text('Product has been created')
     end
 
@@ -46,7 +46,7 @@ RSpec.describe 'Admin::Products', type: :system do
       attach_file 'image', 'app/assets/images/product_placeholder.jpg'
       select category.name, from: 'Category:'
       select brand.brand_name, from: 'Brand:'
-      click_button 'Create Product'
+      click_button 'Create product'
       expect(page).to have_text('Name can\'t be blank')
     end
 
@@ -56,7 +56,7 @@ RSpec.describe 'Admin::Products', type: :system do
       attach_file 'image', 'app/assets/images/product_placeholder.jpg'
       select category.name, from: 'Category:'
       select brand.brand_name, from: 'Brand:'
-      click_button 'Create Product'
+      click_button 'Create product'
       expect(page).to have_text('Price can\'t be blank')
     end
   end

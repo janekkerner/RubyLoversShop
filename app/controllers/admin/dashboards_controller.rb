@@ -8,7 +8,7 @@ module Admin
     layout 'dashboard'
 
     def index
-      @products = Product.all
+      @products = Product.all.order('created_at DESC')
       render :index, locals: { products: @products }
     end
 

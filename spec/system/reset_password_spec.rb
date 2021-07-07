@@ -16,7 +16,7 @@ RSpec.describe 'Authentications', type: :system do
       click_link 'Forgot your password?'
       fill_in 'user_email', with: user.email
       click_button 'Send me reset password instructions'
-      expect(page).to have_text('You will receive an email with instructions on how to reset your password in a few minutes.')
+      expect(page).to have_text('You will receive an email with instructions')
       p
     end
 

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Admin::Products', type: :system do
+RSpec.describe 'Admin::Products#destroy', type: :system do
   let!(:product) { create(:product) }
   let!(:admin) { create(:admin_user) }
 

@@ -15,6 +15,8 @@ Layout/LineLength:
   Max: 120
 Metrics/ClassLength:
   Max: 200
+Metrics/BlockLength:
+  Max: 80
 Metrics/MethodLength:
   Enabled: false
 Style/BlockComments:
@@ -25,3 +27,7 @@ Style/Documentation:
   Enabled: false
 Style/GuardClause:
   Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
