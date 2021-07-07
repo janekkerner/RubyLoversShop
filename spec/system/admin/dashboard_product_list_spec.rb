@@ -5,7 +5,6 @@ require 'rails_helper'
 RSpec.describe 'Dashboard', type: :system do
   let!(:admin) { create(:admin_user) }
   let!(:product) { create(:product) }
-  let!(:product1) { create(:product) }
 
   before do
     driven_by(:rack_test)
@@ -19,6 +18,7 @@ RSpec.describe 'Dashboard', type: :system do
     end
 
     it 'can see all products' do
+      create(:product)
       sign_in admin
       visit admin_dashboard_path
       within 'tbody' do
