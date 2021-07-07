@@ -1,11 +1,14 @@
+<% presenter = ProductPresenter.new(product) %>
 <tr>
   <td><%= product.id %></td>
-  <td><%= image_tag product_image_exist?(product), size: "150" %></td>
+  <td><%= image_tag presenter.image_attached, size: "150" %></td>
   <td><%= product.name %></td>
   <td><%= product.price %></td>
-  <% if product.brand %>
-    <td><%= product.brand.brand_name %></td>
-  <% else %>
-    <td>No brand</td>
-  <% end %>
+  <td><%= presenter.show_brand %></td>
+  <td>
+    <div class="btn-group-vertical">
+      <%= link_to "Delete", admin_product_path(product), method: :delete, id: "destroy-product-#{product.id}", class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+      <%= link_to "Update", edit_admin_product_path(product), id: "update-product-#{product.id}", class: 'btn btn-secondary' %>
+    </div>
+  </td>
 </tr>

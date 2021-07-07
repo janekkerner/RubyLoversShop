@@ -1,7 +1,8 @@
+<% presenter = ProductPresenter.new(product) %>
 <div class="col-lg-4 col-md-6 mb-4">
   <div class="card h-100">
     <a href="#">
-      <%= image_tag product_image_exist?(product), :class => 'card-img-top' %>
+      <%= image_tag presenter.image_attached, :class => 'card-img-top' %>
     </a>
     <div class="card-body">
       <h4 class="card-title">
