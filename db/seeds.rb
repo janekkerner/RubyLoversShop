@@ -7,6 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.first_or_create(email: 'user@example', password: 'password', password_confirmation: 'password')
 
+AdminUser.first_or_create(email: 'admin@example', password: 'password', password_confirmation: 'password')
+
 5.times do |n|
   Category.where(name: "Category #{n + 1}").first_or_create
 end
