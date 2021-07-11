@@ -8,6 +8,8 @@ class Product < ApplicationRecord
 
   belongs_to :category
   belongs_to :brand, optional: true
+  has_many :cart_items
+  has_many :shopping_carts, through: :cart_items
 
   scope :with_category, ->(category) { where category_id: category }
   scope :with_brand, ->(brand) { where brand_id: brand }

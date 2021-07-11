@@ -1,6 +1,8 @@
 class ShoppingCartController < ApplicationController
+  before_action :authenticate_user!
+
   def show
-    products = current_user.shopping_cart.nil? ? current_user.build_shopping_cart : current_user.shopping_cart 
-    render :show, locals: {products: products}
+    shopping_cart_products = current_user.shopping_cart.products
+    render :show, locals: { products: shopping_cart_products}
   end
 end
