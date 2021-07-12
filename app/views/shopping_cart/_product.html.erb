@@ -1,4 +1,6 @@
+<% presenter = ProductPresenter.new(product) %>
 <tr>
-  <td>product.name</td>
-  <td>product.price</td>
+  <td><%= image_tag presenter.image_attached, size: 100 %></td>
+  <td><%= product.name %></td>
+  <td><%= product.price %></td>
 </tr>

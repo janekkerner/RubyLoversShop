@@ -8,7 +8,7 @@ class Product < ApplicationRecord
 
   belongs_to :category
   belongs_to :brand, optional: true
-  has_many :cart_items
+  has_many :cart_items, dependent: :restrict_with_error
   has_many :shopping_carts, through: :cart_items
 
   scope :with_category, ->(category) { where category_id: category }

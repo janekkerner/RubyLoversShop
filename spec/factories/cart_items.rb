@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :cart_item do
-    product { nil }
-    shopping_cart { nil }
+    association :product
+    association :shopping_cart
   end
 end
