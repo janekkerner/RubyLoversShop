@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admin_users, path: '/admin'
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   get '/products', to: 'products#index'
 
   namespace :admin do
