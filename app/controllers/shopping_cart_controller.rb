@@ -9,10 +9,12 @@ class ShoppingCartController < ApplicationController
   end
 
   def add_product_to_cart
-    if current_user.shopping_cart.cart_items.where(product_id: params[:id]).exists?
-      flash[:error] = 'Product is already in your cart'
+    product = Product.find(params[:id])
+    result = ShoppingCartServices::AddProductToCart.new.call(current_user.shopping_cart, product)
+    if result.success?
+      flash[:success] = result.message
     else
-      current_user.shopping_cart.cart_items.create(product_id: params[:id])
+      flash[:notice] = result.error || result.message
     end
     redirect_to cart_path
   end
