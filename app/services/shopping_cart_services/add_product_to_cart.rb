@@ -1,7 +1,7 @@
 module ShoppingCartServices
   class AddProductToCart
     def call(cart, product)
-      if cart.cart_items.map(&:product_id).include?(product.id)
+      if cart.cart_items.exists?(product_id: product.id)
         OpenStruct.new({ success?: false, message: 'Product is already in your shopping cart' })
       else
         create_product_in_cart(cart, product)
