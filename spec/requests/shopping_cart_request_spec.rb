@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'ShoppingCarts', type: :request do
-  let!(:user) { create(:user) }
+  let!(:user) { create(:user, shopping_cart: create(:shopping_cart)) }
   let!(:product) { create(:product) }
 
   describe 'GET /cart' do
@@ -25,7 +25,7 @@ RSpec.describe 'ShoppingCarts', type: :request do
     end
   end
 
-  describe "POST /cart" do
+  describe 'POST /cart' do
     it 'has success http status when user is signed in' do
       sign_in user
       post "/cart/#{product.id}"
@@ -33,9 +33,21 @@ RSpec.describe 'ShoppingCarts', type: :request do
       expect(response).to have_http_status(:success)
     end
 
-    it 'has redirect status when user not sign in' do
+    it 'renders success notification after adding product to cart if user signed in' do
+      sign_in user
       post "/cart/#{product.id}"
-      expect(response).to have_http_status(:redirect)
+      follow_redirect!
+      expect(response.body).to include("Product #{product.name} has been added to your shopping cart")
+    end
+
+    it 'is adding product to shopping cart' do
+      sign_in user
+      create(:shopping_cart)
+      expect do
+        post "/cart/#{product.id}"
+        follow_redirect!
+      end
+        .to change(user.shopping_cart.cart_items, :count)
     end
   end
 end

@@ -12,6 +12,6 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @presenter = ProductPresenter.new(@product)
-    render :show, locals: { product: @product, presenter: @presenter  }
+    render :show, locals: { product: @product, presenter: @presenter }
   end
 end

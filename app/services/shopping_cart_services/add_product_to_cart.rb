@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ShoppingCartServices
   class AddProductToCart
     def call(cart, product)
@@ -13,7 +15,7 @@ module ShoppingCartServices
     def create_product_in_cart(cart, product)
       cart_product = cart.cart_items.build(product_id: product.id)
       if cart_product.save
-        OpenStruct.new({ success?: true, message: 'Product added to your shopping cart'})
+        OpenStruct.new({ success?: true, message: "Product #{product.name} has been added to your shopping cart" })
       else
         OpenStruct.new({ success?: false, error: cart_product.errors })
       end

@@ -2,7 +2,8 @@
 
 class ShoppingCartController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_cart
+  before_action :set_cart, only: %i[show add_product_to_cart]
+  before_action :set_product, only: %i[add_product_to_cart]
 
   def show
     shopping_cart_products = @cart.products
@@ -10,8 +11,7 @@ class ShoppingCartController < ApplicationController
   end
 
   def add_product_to_cart
-    product = Product.find(params[:id])
-    result = ShoppingCartServices::AddProductToCart.new.call(current_user.shopping_cart, product)
+    result = ShoppingCartServices::AddProductToCart.new.call(current_user.shopping_cart, @product)
     if result.success?
       flash[:success] = result.message
     else
@@ -21,6 +21,10 @@ class ShoppingCartController < ApplicationController
   end
 
   private
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
 
   def set_cart
     @cart = current_user.shopping_cart || current_user.create_shopping_cart
