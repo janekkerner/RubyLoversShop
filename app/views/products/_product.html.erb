@@ -8,6 +8,7 @@
       </h4>
       <h5><%= product.price %> $</h5>
       <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+      <%= link_to "Add to cart", add_product_to_cart_path(product), method: :post, class: 'btn btn-primary' %>
     </div>
   </div>
 </div>
