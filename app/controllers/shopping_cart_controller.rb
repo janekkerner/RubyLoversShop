@@ -29,4 +29,10 @@ class ShoppingCartController < ApplicationController
   def set_cart
     @cart = current_user.shopping_cart || current_user.create_shopping_cart
   end
+
+  def check_for_pending_orders
+    if current_user.orders.where(state: 'new').any?
+      redirect_to checkout_path
+    end
+  end
 end

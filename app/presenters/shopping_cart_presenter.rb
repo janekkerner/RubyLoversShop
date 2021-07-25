@@ -11,4 +11,8 @@ class ShoppingCartPresenter
     products_number = @products.uniq.count
     "You have #{products_number} #{'product'.pluralize(products_number)} in your shopping cart"
   end
+
+  def any_pending_orders
+    link_to 
+  end
 end
