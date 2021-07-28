@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Checkouts', type: :request do
   let!(:shopping_cart) { create(:shopping_cart) }
-  let!(:user) { create(:user, shopping_cart: shopping_cart)}
+  let!(:user) { create(:user, shopping_cart: shopping_cart) }
   let!(:product) { create(:product) }
 
   describe 'GET /checkout' do
@@ -13,8 +13,7 @@ RSpec.describe 'Checkouts', type: :request do
       expect(response).to have_http_status(:redirect)
     end
 
-    context "when user signed in" do
-
+    context 'when user signed in' do
       before do
         sign_in user
         user.shopping_cart.cart_items.create(product_id: product.id)
