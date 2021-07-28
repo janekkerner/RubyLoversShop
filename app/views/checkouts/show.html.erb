@@ -1,2 +1,5 @@
 <h1>Checkout</h1>
-<%= order.id if order %>
+<p>Order ID: <%= order.id if order %> </p>
+<% products.each do |p| %>
+  <p><%= p.name %></p>
+<% end %>

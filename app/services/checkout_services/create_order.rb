@@ -9,11 +9,14 @@ module CheckoutServices
       end
     end
 
+    private
+
     def create_order(user, products)
-      order = Order.new(user_id: user.id, products: products.to_a)
+      order_products = products.ids
+      order = Order.new(user_id: user.id, products: order_products)
       if order.save
         user.shopping_cart.products.destroy_all
-        OpenStruct.new({ success?: true, message: "Your order with number #{order.id} was created", payload: order })
+        OpenStruct.new({ success?: true, message: "Your order with number #{order.id} was created", order: order })
       else
         OpenStruct.new({ success?: false, message: "We couldn't create your order. Try again later", errors: order.errors })
       end
