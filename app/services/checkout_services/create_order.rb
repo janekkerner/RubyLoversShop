@@ -19,7 +19,7 @@ module CheckoutServices
       move_products_to_order(order, products)
       if order.save
         user.shopping_cart.products.destroy_all
-        OpenStruct.new({ success?: true, message: "Your order with number #{order.id} was created", payload: order })
+        OpenStruct.new({ success?: true, message: "Your order with ID: #{order.id} was created", payload: order })
       else
         OpenStruct.new({ success?: false, message: "We couldn't create your order. Try again later",
                          errors: order.errors })
