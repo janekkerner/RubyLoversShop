@@ -15,5 +15,6 @@
   </tbody>
 </table>
 <div class="d-grid gap-2 col-6 mx-auto mb-5">
+  <%= link_to 'Clear cart', clear_shopping_cart_path, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-lg btn-outline-danger' %>  
   <%= link_to 'Checkout', create_checkout_path, method: :post, class: 'btn btn-lg btn-outline-success' %>
 </div>
