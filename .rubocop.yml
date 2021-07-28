@@ -30,6 +30,9 @@ Style/GuardClause:
 Rspec/MultipleExpectations:
   Exclude:
     - spec/system/**
+Metrics/AbcSize:
+  Exclude:
+    - app/controllers/**
 RSpec/ExampleLength:
   Enabled: false
 RSpec/MultipleMemoizedHelpers:

@@ -13,6 +13,6 @@ class ShoppingCartPresenter
   end
 
   def any_pending_orders
-    link_to 
+    link_to
   end
 end
