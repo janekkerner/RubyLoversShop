@@ -1,6 +1,7 @@
-<% presenter = ProductPresenter.new(product) %>
+<% presenter = ProductPresenter.new(cart_item.product) %>
 <tr>
   <td><%= image_tag presenter.image_attached, size: 100 %></td>
-  <td><%= product.name %></td>
-  <td><%= product.price %></td>
+  <td><%= cart_item.product.name %></td>
+  <td><%= cart_item.quantity %></td>
+  <td><%= cart_item.product.price * cart_item.quantity %></td>
 </tr>
