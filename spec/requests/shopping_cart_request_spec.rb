@@ -26,28 +26,46 @@ RSpec.describe 'ShoppingCarts', type: :request do
   end
 
   describe 'POST /cart' do
-    it 'has success http status when user is signed in' do
-      sign_in user
-      post "/cart/#{product.id}"
-      follow_redirect!
-      expect(response).to have_http_status(:success)
-    end
-
-    it 'renders success notification after adding product to cart if user signed in' do
-      sign_in user
-      post "/cart/#{product.id}"
-      follow_redirect!
-      expect(response.body).to include("Product #{product.name} has been added to your shopping cart")
-    end
-
-    it 'is adding product to shopping cart' do
-      sign_in user
-      create(:shopping_cart)
-      expect do
+    context 'when not user signed in' do
+      it 'redirect to sign in page if user not signed in' do
         post "/cart/#{product.id}"
         follow_redirect!
+        expect(response.body).to include('You need to sign in or sign up before continuing.')
       end
-        .to change(user.shopping_cart.cart_items, :count)
+    end
+
+    context 'when user signed in' do
+      before do
+        sign_in user
+      end
+
+      it 'has success http status when user is signed in' do
+        post "/cart/#{product.id}"
+        follow_redirect!
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'renders success notification after adding product to cart if user signed in' do
+        post "/cart/#{product.id}"
+        follow_redirect!
+        expect(response.body).to include("Product #{product.name} has been added to your shopping cart")
+      end
+
+      it 'is adding product to shopping cart' do
+        expect do
+          post "/cart/#{product.id}"
+          follow_redirect!
+        end
+          .to change(user.shopping_cart.cart_items, :count)
+      end
+
+      it 'increase quantity of cart item if same product is added to shopping cart' do
+        2.times do
+          post "/cart/#{product.id}"
+          follow_redirect!
+        end
+        expect(user.shopping_cart.cart_items.find_by(product_id: product.id).quantity).to eq(2)
+      end
     end
   end
 end

@@ -6,8 +6,8 @@ class ShoppingCartController < ApplicationController
   before_action :set_product, only: %i[add_product_to_cart]
 
   def show
-    shopping_cart_products = @cart.products
-    render :show, locals: { products: shopping_cart_products }
+    cart_items = @cart.cart_items
+    render :show, locals: { cart_items: cart_items }
   end
 
   def add_product_to_cart

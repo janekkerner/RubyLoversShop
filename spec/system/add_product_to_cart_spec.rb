@@ -11,6 +11,16 @@ RSpec.describe 'ShoppingCart#add_product_to_cart', type: :system do
     driven_by(:rack_test)
   end
 
+  describe 'when guest is visiting home page' do
+    it 'needs to sign in first, to add product to cart' do
+      visit '/'
+      within '#products' do
+        click_link('Add to cart', match: :first)
+      end
+      expect(page).to have_text('You need to sign in or sign up before continuing.')
+    end
+  end
+
   describe 'when logged in user is visiting home page' do
     before do
       sign_in user
@@ -31,12 +41,12 @@ RSpec.describe 'ShoppingCart#add_product_to_cart', type: :system do
       expect(page).to have_text("Product #{product.name} has been added to your shopping cart")
     end
 
-    it 'cannot add product that is already in cart' do
+    it 'can add product that is already in cart and increment its quantity' do
       visit "/products/#{product.id}"
       click_link('Add to cart')
       visit "/products/#{product.id}"
       click_link('Add to cart')
-      expect(page).to have_text('Product is already in your shopping cart')
+      expect(page).to have_text("Quantity of #{product.name} has been incremented")
     end
 
     it 'can add multiple products to shopping cart' do
