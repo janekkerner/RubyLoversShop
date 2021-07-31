@@ -26,7 +26,7 @@ RSpec.describe 'ShoppingCarts', type: :request do
   end
 
   describe 'POST /cart' do
-    context 'when not user signed in' do
+    context 'when user is not signed in' do
       it 'redirect to sign in page if user not signed in' do
         post "/cart/#{product.id}"
         follow_redirect!
@@ -39,19 +39,19 @@ RSpec.describe 'ShoppingCarts', type: :request do
         sign_in user
       end
 
-      it 'has success http status when user is signed in' do
+      it 'has success http status' do
         post "/cart/#{product.id}"
         follow_redirect!
         expect(response).to have_http_status(:success)
       end
 
-      it 'renders success notification after adding product to cart if user signed in' do
+      it 'renders success notification after adding product to cart' do
         post "/cart/#{product.id}"
         follow_redirect!
         expect(response.body).to include("Product #{product.name} has been added to your shopping cart")
       end
 
-      it 'is adding product to shopping cart' do
+      it 'can add product to shopping cart' do
         expect do
           post "/cart/#{product.id}"
           follow_redirect!
