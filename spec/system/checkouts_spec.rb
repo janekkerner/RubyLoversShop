@@ -23,7 +23,7 @@ RSpec.describe 'Checkouts', type: :system do
       expect(page).to have_text("Order ID: #{user.orders.last.id}")
     end
 
-    it 'can see in order summary products that was in shopping cart' do
+    it 'can see in order summary products that was in shopping cart before' do
       user.shopping_cart.cart_items.create(product_id: product2.id)
       click_link('Checkout')
       expect(page).to have_text(product.name.to_s)
@@ -34,6 +34,13 @@ RSpec.describe 'Checkouts', type: :system do
       user.shopping_cart.cart_items.destroy_all
       click_link('Checkout')
       expect(page).to have_text('Add some products to continue checkout')
+    end
+
+    it 'can clear products in shopping_cart' do
+      visit '/cart'
+      expect(page).to have_text('You have 1 product in your shopping cart')
+      click_link('Clear cart')
+      expect(page).to have_text('Your shopping cart is empty')
     end
   end
 end

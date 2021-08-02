@@ -5,12 +5,18 @@
     <tr>
       <th scope="col">Image</th>
       <th scope="col">Product name</th>
+      <th scope="col">Unit price</th>
+      <th scope="col">Quantity</th>
       <th scope="col">Price</th>
     </tr>
   </thead>
   <tbody>
-    <% products.each do |product| %>
-      <%= render partial: 'shopping_cart/product', locals: { product: product } %>
+    <% order_items.each do |order_item| %>
+      <%= render partial: 'product', locals: { order_item: order_item } %>
     <% end %>
+    <tr>
+      <th colspan="4">Order total price:</th>
+      <th><%= number_to_currency(order.total_price) %></th>
+    </tr>
   </tbody>
 </table>

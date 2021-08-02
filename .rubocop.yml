@@ -27,12 +27,13 @@ Style/Documentation:
   Enabled: false
 Style/GuardClause:
   Enabled: false
-Rspec/MultipleExpectations:
+RSpec/MultipleExpectations:
   Exclude:
     - spec/system/**
 Metrics/AbcSize:
   Exclude:
     - app/controllers/**
+    - app/services/**/**
 RSpec/ExampleLength:
   Enabled: false
 RSpec/MultipleMemoizedHelpers:

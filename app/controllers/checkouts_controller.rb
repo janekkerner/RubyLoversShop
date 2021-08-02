@@ -6,8 +6,8 @@ class CheckoutsController < ApplicationController
   def show
     if current_user.orders.any?
       order = current_user.orders.select(&:state_new?).last
-      cart_items = order.cart_items
-      render :show, locals: { order: order, cart_items: cart_items }
+      order_items = order.order_items
+      render :show, locals: { order: order, order_items: order_items }
     else
       redirect_to cart_path
     end
