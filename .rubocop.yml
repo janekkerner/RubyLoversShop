@@ -27,13 +27,9 @@ Style/Documentation:
   Enabled: false
 Style/GuardClause:
   Enabled: false
-RSpec/MultipleExpectations:
+Rspec/MultipleExpectations:
   Exclude:
     - spec/system/**
-Metrics/AbcSize:
-  Exclude:
-    - app/controllers/**
-    - app/services/**/**
 RSpec/ExampleLength:
   Enabled: false
 RSpec/MultipleMemoizedHelpers:
