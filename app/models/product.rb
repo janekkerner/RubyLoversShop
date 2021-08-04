@@ -10,8 +10,6 @@ class Product < ApplicationRecord
   belongs_to :brand, optional: true
   has_many :cart_items, dependent: :restrict_with_error
   has_many :shopping_carts, through: :cart_items
-  has_many :order_items, dependent: :restrict_with_error
-  has_many :orders, through: :order_items
 
   scope :with_category, ->(category) { where category_id: category }
   scope :with_brand, ->(brand) { where brand_id: brand }
