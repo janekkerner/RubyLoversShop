@@ -5,7 +5,7 @@ class CheckoutsController < ApplicationController
 
   def show
     if current_user.orders.any?
-      order = current_user.orders.select(&:state_new?).last
+      order = current_user.orders.select(&:state_new?).last || current_user.orders.last
       order_items = order.order_items
       render :show, locals: { order: order, order_items: order_items }
     else
