@@ -5,6 +5,7 @@
     <tr>
       <th scope="col">Image</th>
       <th scope="col">Product name</th>
+      <th scope="col">Unit price</th>
       <th scope="col">Quantity</th>
       <th scope="col">Price</th>
     </tr>
@@ -13,5 +14,13 @@
     <% cart_items.each do |cart_item| %>
       <%= render partial: 'shopping_cart/product', locals: { cart_item: cart_item } %>
     <% end %>
+    <tr>
+      <th colspan="4">Total price:</th>
+      <th><%= number_to_currency(presenter.show_total_price) %></th>
+    </tr>
   </tbody>
 </table>
+<div class="d-grid gap-2 col-6 mx-auto mb-5">
+  <%= link_to 'Clear cart', clear_shopping_cart_path, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-lg btn-outline-danger' %>
+  <%= link_to 'Checkout', create_checkout_path, method: :post, class: 'btn btn-lg btn-outline-success' %>
+</div>

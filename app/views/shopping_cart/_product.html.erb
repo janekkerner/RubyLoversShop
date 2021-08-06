@@ -1,7 +1,8 @@
 <% presenter = ProductPresenter.new(cart_item.product) %>
 <tr>
   <td><%= image_tag presenter.image_attached, size: 100 %></td>
-  <td><%= cart_item.product.name %></td>
+  <td><%= cart_item.product_name %></td>
+  <td><%= number_to_currency(cart_item.product_price) %></td>
   <td><%= cart_item.quantity %></td>
-  <td><%= cart_item.product.price * cart_item.quantity %></td>
+  <td><%= number_to_currency(calculate_total_price(cart_item)) %></td>
 </tr>

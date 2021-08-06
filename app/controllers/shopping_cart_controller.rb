@@ -20,6 +20,17 @@ class ShoppingCartController < ApplicationController
     redirect_to cart_path
   end
 
+  def destroy_cart_items
+    cart_items = current_user.shopping_cart.cart_items
+    if cart_items.any?
+      cart_items.destroy_all
+      flash[:notice] = 'Your shopping cart has been cleared'
+    else
+      flash[:alert] = 'Your shopping cart is empty and cannot be cleared'
+    end
+    redirect_back fallback_location: root_path
+  end
+
   private
 
   def set_product
