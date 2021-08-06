@@ -27,6 +27,7 @@ module ShoppingCartServices
 
     def create_product_in_cart(cart, product)
       cart_product = cart.cart_items.build(product_id: product.id)
+      cart_product.increment(:quantity)
       if cart_product.save
         OpenStruct.new({ success?: true, message: "Product #{product.name} has been added to your shopping cart" })
       else
