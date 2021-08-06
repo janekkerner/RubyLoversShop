@@ -9,12 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <%= render 'admin_navigation' %>
+    <%= render 'navigation' %>
     <%= render 'flash_messages' %>
     <div class="container">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-9">
+          <%= render 'products_carousel' %>
           <%= yield %>
+        </div>
+        <div class="col-lg-3">
+          <%= render 'sidebar' %>
         </div>
       </div>
     </div>
