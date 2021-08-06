@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <%= image_tag presenter.image_attached, class: 'card-img-top'  %>
+    </div>
+    <div class="col-lg-6">
+      <h1><%= product.name %></h1>
+      <h2><%= number_to_currency product.price %></h2>
+      <%= link_to 'Add to cart', add_product_to_cart_path(product), method: :post, class: 'btn btn-secondary' %>
+    </div>
+  </div>
+
+</div>
