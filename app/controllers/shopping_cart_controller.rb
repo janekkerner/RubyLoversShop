@@ -25,10 +25,15 @@ class ShoppingCartController < ApplicationController
     if cart_items.any?
       cart_items.destroy_all
       flash[:notice] = 'Your shopping cart has been cleared'
+<<<<<<< HEAD
     elsif cart_items.empty?
       flash[:alert] = 'Your shopping cart is empty and cannot be cleared'
     else
       flash[:error] = "Sorry, something went wrong. We couldn't clear your shopping cart"
+=======
+    else
+      flash[:alert] = 'Your shopping cart is empty and cannot be cleared'
+>>>>>>> master
     end
     redirect_back fallback_location: root_path
   end

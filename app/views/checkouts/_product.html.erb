@@ -1,8 +1,15 @@
 <% presenter = ProductPresenter.new(order_item.product) %>
 <tr>
   <td><%= image_tag presenter.image_attached, size: 100 %></td>
+<<<<<<< HEAD
   <td><%= order_item.product.name %></td>
   <td><%= number_to_currency(order_item.product.price) %></td>
   <td><%= order_item.quantity %></td>
   <td><%= number_to_currency(order_item.product.price * order_item.quantity) %></td>
+=======
+  <td><%= order_item.product_name %></td>
+  <td><%= number_to_currency(order_item.product_price) %></td>
+  <td><%= order_item.quantity %></td>
+  <td><%= number_to_currency(order_item.product_price * order_item.quantity) %></td>
+>>>>>>> master
 </tr>
