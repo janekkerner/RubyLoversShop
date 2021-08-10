@@ -1,0 +1,7 @@
+<tr>
+  <td><%= order.id %></td>
+  <td class="bg <%= bootstrap_order_status_class(order.state.to_s) %> text-white"><%= order.state %></td>
+  <td><%= order.created_at %></td>
+  <td><%= order.total_price %></td>
+  <td><%= link_to 'show', admin_order_path(order), class: 'btn btn-info btn-outline' %></td>
+</tr>

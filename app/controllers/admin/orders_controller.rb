@@ -1,8 +1,8 @@
 class Admin::OrdersController < ApplicationController
   layout 'dashboard'
-  
+
   def index
-    orders = Order.all.order('created_at DESC')
-    render :index, locals: { orders: orders }
+    @pagy, @records = pagy(Order.all.order('created_at DESC'))
+    render :index, locals: { orders: @records, pagy: @pagy }
   end
 end
