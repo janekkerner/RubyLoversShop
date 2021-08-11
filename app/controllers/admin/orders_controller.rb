@@ -1,4 +1,6 @@
 class Admin::OrdersController < ApplicationController
+  before_action :authenticate_admin_user!
+  
   layout 'dashboard'
 
   def index
