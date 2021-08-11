@@ -29,16 +29,16 @@ RSpec.describe 'Dashboards', type: :system do
       sign_out admin
     end
 
-    it "can see orders state" do
-      expect(page).to have_text("#{order.state}")
+    it 'can see orders state' do
+      expect(page).to have_text(order.state.to_s)
     end
 
     it 'can see orders date' do
-      expect(page).to have_text("#{order.created_at}")
+      expect(page).to have_text(order.created_at.strftime('%T %F').to_s)
     end
 
-    it "can see orders total price" do
-      expect(page).to have_text("#{order.total_price}")
+    it 'can see orders total price' do
+      expect(page).to have_text(order.total_price.to_s)
     end
   end
 end

@@ -2,7 +2,7 @@
 
 module ApplicationHelper
   include Pagy::Frontend
-  
+
   def bootstrap_flash_class(type)
     case type
     when 'success'
