@@ -13,7 +13,7 @@ gem 'webpacker', '~> 4.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'ransack'
 gem 'devise'
-gem 'pagy', '~> 3.5' 
+gem 'pagy', '~> 3.5'
 
 group :development, :test do
   gem 'pry-rails'
