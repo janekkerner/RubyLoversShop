@@ -10,5 +10,10 @@ module Admin
       @pagy, @records = pagy(Order.all.order('created_at DESC'))
       render :index, locals: { orders: @records, pagy: @pagy }
     end
+
+    def show
+      order = Order.find(params[:id])
+      render :show, locals: { order: order }
+    end
   end
 end

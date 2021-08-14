@@ -15,8 +15,8 @@
       <%= render partial: 'product', locals: { order_item: order_item } %>
     <% end %>
     <tr>
-      <th colspan="4">Order total price:</th>
-      <th><%= number_to_currency(order.total_price) %></th>
+      <td colspan="4">Order total price:</td>
+      <td><%= number_to_currency(order.total_price) %></td>
     </tr>
   </tbody>
 </table>
