@@ -14,6 +14,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'ransack'
 gem 'devise'
 gem 'pagy', '~> 3.5'
+gem 'aasm'
 
 group :development, :test do
   gem 'pry-rails'
