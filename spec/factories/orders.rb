@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :order do
-    state { '' }
+    state { 'new' }
     association :user
   end
 end
