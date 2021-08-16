@@ -23,8 +23,9 @@
   </tbody>
 </table>
 <div class="row">
+  <%= render partial: 'payment', locals: { payment: payment, order_presenter: order_presenter }%>
   <div class="col-sm-6">
-    <div class="card">
+    <div class="card mb-4">
       <h4 class="card-header">Order user's data
       </h4>
       <div class="card-body">
@@ -33,7 +34,7 @@
     </div>
   </div>
   <div class="col-sm-6">
-    <div class="card">
+    <div class="card mb-4">
       <h4 class="card-header">Order's data
       </h4>
       <div class="card-body">

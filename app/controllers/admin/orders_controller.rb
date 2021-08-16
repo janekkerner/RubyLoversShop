@@ -7,13 +7,15 @@ module Admin
     layout 'dashboard'
 
     def index
-      @pagy, @records = pagy(Order.all.order('created_at DESC'))
+      @pagy, @records = pagy(Order.order('created_at DESC'))
       render :index, locals: { orders: @records, pagy: @pagy }
     end
 
     def show
       order = Order.find(params[:id])
-      render :show, locals: { order: order }
+      payment = order.payment || order.create_payment
+      order_presenter = Admin::OrderPresenter.new(order)
+      render :show, locals: { order: order, payment: payment, order_presenter: order_presenter }
     end
   end
 end

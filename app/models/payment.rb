@@ -15,6 +15,7 @@ class Payment < ApplicationRecord
   end
 
   belongs_to :order
+  
   enum status: {
     pending: 0,
     failed: 1,

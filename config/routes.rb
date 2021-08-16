@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'dashboards#index'
     resources :orders, only: [:index, :show]
     resources :products
+    resources :payments, only: [:update]
   end
 
   post '/', to: 'pages#home'

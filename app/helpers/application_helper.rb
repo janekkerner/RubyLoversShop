@@ -20,12 +20,23 @@ module ApplicationHelper
 
   def bootstrap_order_status_class(type)
     case type
-    when 'new'
+    when 'new', 'pending'
       'bg-info'
     when 'failed'
       'bg-danger'
     when 'completed'
       'bg-success'
+    end
+  end
+
+  def bootstrap_payment_event_class(type)
+    case type
+    when 'pending'
+      'info'
+    when 'confirm', 'completed'
+      'success'
+    when 'reject', 'failed'
+      'danger'
     end
   end
 end
