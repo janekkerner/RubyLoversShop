@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Payment < ApplicationRecord
   include AASM
 
@@ -6,7 +8,7 @@ class Payment < ApplicationRecord
     state :failed, :completed
 
     event :confirm do
-      transitions from: :pending, to: :completed 
+      transitions from: :pending, to: :completed
     end
 
     event :reject do
@@ -15,10 +17,4 @@ class Payment < ApplicationRecord
   end
 
   belongs_to :order
-  
-  enum status: {
-    pending: 0,
-    failed: 1,
-    completed: 2
-  }, _prefix: 'status'
 end

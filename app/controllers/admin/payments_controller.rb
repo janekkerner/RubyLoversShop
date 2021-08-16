@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 module Admin
   class PaymentsController < ApplicationController
     before_action :authenticate_admin_user!
     before_action :set_payment
 
     def update
-      action = params[:event]
-      @payment.send(action) #if @payment.send("may_#{action}?")
+      event = params[:event]
       order = @payment.order
-      if @payment.save
-        flash[:notice] = "Payment has been updated"
+      result = Admin::OrdersServices::PaymentStatus.new.call(@payment, event)
+      if result.success?
+        flash[:notice] = result.message
       else
-        flash[:alert] = "Something went wrong"     
+        flash[:alert] = result.message
       end
       redirect_to admin_order_path(order)
     end
