@@ -1,5 +1,5 @@
 <div class="col-sm-6">
-  <div class="card mb-4">
+  <div class="card mb-4" id="payment_card">
   <h4 class="card-header">Payment</h4>
     <div class="card-body">
       <h6 class='cart-title'>Current payment status: <span class="badge p-2 text-white bg-<%= bootstrap_payment_event_class(payment.aasm_state.to_s) %>"><%= payment.aasm_state %></span></h6>
