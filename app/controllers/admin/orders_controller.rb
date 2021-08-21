@@ -14,8 +14,9 @@ module Admin
     def show
       order = Order.find(params[:id])
       payment = order.payment || order.create_payment
+      shipment = order.shipment || order.create_shipment
       order_presenter = Admin::OrderPresenter.new(order)
-      render :show, locals: { order: order, payment: payment, order_presenter: order_presenter }
+      render :show, locals: { order: order, payment: payment, shipment: shipment, order_presenter: order_presenter }
     end
   end
 end
