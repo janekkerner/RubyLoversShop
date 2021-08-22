@@ -1,6 +1,25 @@
 # frozen_string_literal: true
 
 class Order < ApplicationRecord
+  include AASM
+
+  aasm column: :state, enum: true do
+    state :new, initial: true
+    state :failed, :completed
+
+    event :complete do
+      transitions from: :new, to: :completed, guard: :payment_and_shipment_completed?
+    end
+
+    event :refuse do
+      transitions form: [:new, :completed], to: :failed
+    end
+  end
+
+  def payment_and_shipment_completed?
+    payment.completed? && shipment.shipped?
+  end
+
   belongs_to :user
   has_many :order_items, dependent: :destroy
   has_many :products, through: :order_items
