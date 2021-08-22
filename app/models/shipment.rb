@@ -25,7 +25,7 @@ class Shipment < ApplicationRecord
   end
 
   def payment_completed?
-    order.payment_aasm_state == 'completed'
+    order.payment.completed?
   end
 
   belongs_to :order
