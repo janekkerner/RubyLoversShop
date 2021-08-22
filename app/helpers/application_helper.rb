@@ -31,13 +31,13 @@ module ApplicationHelper
 
   def bootstrap_events_class(type)
     case type
-    when 'pending', 'ready'
+    when 'pending', 'ready', 'prepare'
       'info'
-    when 'canceled'
+    when 'canceled', 'cancel'
       'secondary'
-    when 'confirm', 'completed', 'shipped'
+    when 'confirm', 'completed', 'shipped', 'ship'
       'success'
-    when 'reject', 'failed'
+    when 'reject', 'failed', 'fail'
       'danger'
     end
   end

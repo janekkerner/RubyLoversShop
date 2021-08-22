@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show]
     resources :products
     resources :payments, only: [:update]
+    resources :shipments, only: [:update]
   end
 
   post '/', to: 'pages#home'
