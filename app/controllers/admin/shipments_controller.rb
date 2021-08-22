@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Admin
   class ShipmentsController < ApplicationController
     before_action :authenticate_admin_user!
@@ -20,6 +22,5 @@ module Admin
     def set_shipment
       @shipment = Shipment.find(params[:id])
     end
-  end  
+  end
 end
-

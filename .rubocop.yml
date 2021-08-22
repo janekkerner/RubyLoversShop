@@ -32,7 +32,7 @@ Style/GuardClause:
 RSpec/MultipleExpectations:
   Exclude:
     - spec/system/**
-    - spec/system/admin/payment_status_spec.rb
+    - spec/system/admin/**
     - spec/requests/**/**
 Metrics/AbcSize:
   Exclude:

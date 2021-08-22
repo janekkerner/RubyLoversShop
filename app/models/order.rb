@@ -16,5 +16,6 @@ class Order < ApplicationRecord
   before_create :build_payment
   before_create :build_shipment
 
-  delegate :aasm_state, to: :payment, prefix: 'payment'
+  delegate :aasm_state, :id, to: :payment, prefix: 'payment'
+  delegate :aasm_state, :id, to: :shipment, prefix: 'shipment'
 end

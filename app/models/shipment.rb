@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Shipment < ApplicationRecord
   include AASM
 
@@ -23,7 +25,7 @@ class Shipment < ApplicationRecord
   end
 
   def payment_completed?
-    self.order.payment_aasm_state == 'completed'
+    order.payment_aasm_state == 'completed'
   end
 
   belongs_to :order
