@@ -12,7 +12,7 @@ class Order < ApplicationRecord
     end
 
     event :refuse do
-      transitions form: :new, to: :failed
+      transitions from: :new, to: :failed
     end
   end
 

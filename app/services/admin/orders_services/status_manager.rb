@@ -10,7 +10,7 @@ module Admin
         OpenStruct.new(success?: false, message: 'You are not allowed to do this operation')
       else
         OpenStruct.new(success?: true,
-                       message: "#{object.class.name.capitalize} status has been updated to #{object.aasm_state}")
+                       message: "#{object.class.name.capitalize} status has been updated to #{object.aasm_read_state}")
       end
     end
   end
