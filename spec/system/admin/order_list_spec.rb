@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Dashboards', type: :system do
-  let!(:admin) { create(:admin_user) }
   let!(:user) { create(:user) }
   let!(:order) { create(:order, user_id: user.id) }
 
@@ -19,6 +18,8 @@ RSpec.describe 'Dashboards', type: :system do
   end
 
   describe 'when admin user is visiting admin page' do
+    let!(:admin) { create(:admin_user) }
+
     before do
       sign_in admin
       visit admin_orders_path
