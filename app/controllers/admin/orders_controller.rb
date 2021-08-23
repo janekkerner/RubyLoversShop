@@ -3,7 +3,7 @@
 module Admin
   class OrdersController < ApplicationController
     before_action :authenticate_admin_user!
-    before_action :set_order, only: [:show, :update]
+    before_action :set_order, only: %i[show update]
 
     layout 'dashboard'
 
