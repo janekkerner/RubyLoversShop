@@ -10,4 +10,6 @@ class Order < ApplicationRecord
     failed: 1,
     completed: 2
   }, _prefix: :state
+
+  delegate :email, to: :user, prefix: 'user'
 end
