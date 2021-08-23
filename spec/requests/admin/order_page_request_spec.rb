@@ -3,10 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin::Orders', type: :request do
-  let!(:admin) { create(:admin_user) }
   let!(:user) { create(:user) }
   let!(:order) { create(:order, user_id: user.id) }
-  let!(:product) { create(:product) }
 
   describe 'GET /admin/orders/:id' do
     context 'when admin not signed in' do
@@ -19,6 +17,9 @@ RSpec.describe 'Admin::Orders', type: :request do
     end
 
     context 'when admin signed in' do
+      let!(:admin) { create(:admin_user) }
+      let!(:product) { create(:product) }
+
       before do
         sign_in admin
         create(:order_item, order_id: order.id, product_id: product.id)
