@@ -7,6 +7,23 @@ RSpec.describe 'Admin::Shipments', type: :request do
   let!(:order) { create(:order, user_id: user.id) }
 
   describe 'GET /admin/order/:id' do
+    context 'when anonymous user' do
+      it 'redirects to admin login page' do
+        get "/admin/orders/#{order.id}"
+        follow_redirect!
+        expect(response.body).to include('Log in as Admin')
+      end
+    end
+
+    context 'when user signed in' do
+      it 'redirects to admin login page' do
+        sign_in user
+        get "/admin/orders/#{order.id}"
+        follow_redirect!
+        expect(response.body).to include('Log in as Admin')
+      end
+    end
+
     context 'when admin signed in' do
       let!(:admin) { create(:admin_user) }
       let!(:product) { create(:product) }
