@@ -16,6 +16,16 @@ RSpec.describe 'Admin::Orders', type: :request do
       end
     end
 
+    context 'when user signed in' do
+      it 'redirects to admin log in' do
+        sign_in user
+        get "/admin/orders/#{order.id}"
+        expect(response).to have_http_status(:redirect)
+        follow_redirect!
+        expect(response.body).to include('Log in as Admin')
+      end
+    end
+
     context 'when admin signed in' do
       let!(:admin) { create(:admin_user) }
       let!(:product) { create(:product) }
