@@ -10,8 +10,16 @@ RSpec.describe 'Dashboards', type: :system do
     driven_by(:rack_test)
   end
 
-  describe 'when anonymous user is visiting order page' do
+  describe 'when anononimous user is visiting order page' do
     it 'is redirected to admin sign in page' do
+      visit admin_order_path(order.id)
+      expect(page).to have_text('Log in as Admin')
+    end
+  end
+
+  describe 'when user is visiting order page' do
+    it 'is redirected to admin sign in page' do
+      sign_in user
       visit admin_order_path(order.id)
       expect(page).to have_text('Log in as Admin')
     end
