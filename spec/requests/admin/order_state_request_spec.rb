@@ -7,6 +7,23 @@ RSpec.describe 'Admin::Orders', type: :request do
   let!(:order) { create(:order, user_id: user.id) }
 
   describe 'PATCH /admin/order/:id' do
+    context 'when anonymous user' do
+      it 'redirect to admin log in page' do
+        get "/admin/orders/#{order.id}"
+        follow_redirect!
+        expect(response.body).to include('Log in as Admin')
+      end
+    end
+
+    context 'when user signed in' do
+      it 'redirect to admin log in page' do
+        sign_in user
+        get "/admin/orders/#{order.id}"
+        follow_redirect!
+        expect(response.body).to include('Log in as Admin')
+      end
+    end
+
     context 'when admin signed in' do
       let!(:admin) { create(:admin_user) }
       let!(:product) { create(:product) }

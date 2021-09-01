@@ -4,6 +4,8 @@ module Admin
   class OrdersController < ApplicationController
     before_action :authenticate_admin_user!
     before_action :set_order, only: %i[show update]
+    before_action :set_payment, only: %i[show update]
+    before_action :set_shipment, only: %i[show update]
 
     layout 'dashboard'
 
@@ -13,10 +15,8 @@ module Admin
     end
 
     def show
-      payment = @order.payment || @order.create_payment
-      shipment = @order.shipment || @order.create_shipment
       order_presenter = Admin::OrderPresenter.new(@order)
-      render :show, locals: { order: @order, payment: payment, shipment: shipment, order_presenter: order_presenter }
+      render :show, locals: { order: @order, payment: @payment, shipment: @shipment, order_presenter: order_presenter }
     end
 
     def update
@@ -33,7 +33,18 @@ module Admin
     private
 
     def set_order
-      @order ||= Order.find(params[:id])
+      @set_order ||= Order.find(params[:id])
+      @order = @set_order
+    end
+
+    def set_payment
+      set_payment = @order.payment || @order.create_payment
+      @payment = set_payment
+    end
+
+    def set_shipment
+      set_shipment = @order.shipment || @order.create_shipment
+      @shipment = set_shipment
     end
   end
 end

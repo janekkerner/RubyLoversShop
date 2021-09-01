@@ -29,8 +29,6 @@ Style/Documentation:
   Enabled: false
 Style/GuardClause:
   Enabled: false
-Naming/MemoizedInstanceVariableName:
-  Enabled: false
 RSpec/MultipleExpectations:
   Exclude:
     - spec/system/**
