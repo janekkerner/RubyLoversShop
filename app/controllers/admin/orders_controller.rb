@@ -4,8 +4,8 @@ module Admin
   class OrdersController < ApplicationController
     before_action :authenticate_admin_user!
     before_action :set_order, only: %i[show update]
-    before_action :set_payment, only: %i[show update]
-    before_action :set_shipment, only: %i[show update]
+    before_action :set_payment, only: [:show]
+    before_action :set_shipment, only: [:show]
 
     layout 'dashboard'
 
