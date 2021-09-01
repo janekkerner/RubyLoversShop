@@ -3,6 +3,8 @@
 class Shipment < ApplicationRecord
   include AASM
 
+  belongs_to :order
+
   aasm do
     state :pending, initial: true
     state :ready, :shipped, :failed, :canceled
@@ -27,6 +29,4 @@ class Shipment < ApplicationRecord
   def payment_completed?
     order.payment.completed?
   end
-
-  belongs_to :order
 end
