@@ -17,6 +17,14 @@ RSpec.describe 'Admin::Order', type: :system do
     end
   end
 
+  describe 'when signed in user is visiting order page' do
+    it 'is redirected to admin sign in page' do
+      sign_in user
+      visit admin_order_path(order.id)
+      expect(page).to have_text('Log in as Admin')
+    end
+  end
+
   describe 'when admin user is visiting order page on admin panel' do
     let!(:admin) { create(:admin_user) }
     let!(:product) { create(:product) }
