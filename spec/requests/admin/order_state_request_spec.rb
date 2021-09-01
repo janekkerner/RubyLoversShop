@@ -38,8 +38,8 @@ RSpec.describe 'Admin::Orders', type: :request do
         expect(response.body).to include(order.aasm_read_state.to_s)
       end
 
-      it 'allows to change order status to failed' do
-        patch "/admin/orders/#{order.shipment_id}/", params: { event: 'refuse' }
+      it 'allows to change order status to failed if order has new state' do
+        patch "/admin/orders/#{order.id}/", params: { event: 'refuse' }
         follow_redirect!
         expect(response.body).to include('Order status has been updated to failed')
       end
