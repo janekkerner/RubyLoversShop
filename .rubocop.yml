@@ -21,6 +21,8 @@ Metrics/MethodLength:
   Enabled: false
 Style/BlockComments:
   Enabled: false
+Style/HashLikeCase:
+  Enabled: false
 Bundler/OrderedGems:
   Enabled: false
 Style/Documentation:
@@ -30,6 +32,8 @@ Style/GuardClause:
 RSpec/MultipleExpectations:
   Exclude:
     - spec/system/**
+    - spec/system/admin/**
+    - spec/requests/**/**
 Metrics/AbcSize:
   Exclude:
     - app/controllers/**
