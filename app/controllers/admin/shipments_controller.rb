@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 module Admin
-  class PaymentsController < ApplicationController
+  class ShipmentsController < ApplicationController
     before_action :authenticate_admin_user!
-    before_action :set_payment
+    before_action :set_shipment
 
     def update
       event = params[:event]
-      order = @payment.order
-      result = Admin::OrdersServices::StatusManager.new.call(@payment, event)
+      order = @shipment.order
+      result = Admin::OrdersServices::StatusManager.new.call(@shipment, event)
       if result.success?
         flash[:notice] = result.message
       else
@@ -19,8 +19,8 @@ module Admin
 
     private
 
-    def set_payment
-      @payment = Payment.find(params[:id])
+    def set_shipment
+      @shipment = Shipment.find(params[:id])
     end
   end
 end

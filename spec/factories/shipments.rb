@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :payment do
-    order { nil }
+  factory :shipment do
+    order
   end
 end

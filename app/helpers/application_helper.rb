@@ -29,13 +29,15 @@ module ApplicationHelper
     end
   end
 
-  def bootstrap_payment_event_class(type)
+  def bootstrap_events_class(type)
     case type
-    when 'pending'
+    when 'pending', 'ready', 'prepare', 'new'
       'info'
-    when 'confirm', 'completed'
+    when 'canceled', 'cancel'
+      'secondary'
+    when 'confirm', 'completed', 'shipped', 'ship', 'complete'
       'success'
-    when 'reject', 'failed'
+    when 'reject', 'failed', 'fail', 'refuse'
       'danger'
     end
   end

@@ -24,6 +24,8 @@
 </table>
 <div class="row">
   <%= render partial: 'payment', locals: { payment: payment, order_presenter: order_presenter }%>
+  <%= render partial: 'shipment', locals: { shipment: shipment, order_presenter: order_presenter }%>
+  <%= render partial: 'order_state', locals: { order: order, order_presenter: order_presenter }%>
   <div class="col-sm-6">
     <div class="card mb-4">
       <h4 class="card-header">Order user's data
