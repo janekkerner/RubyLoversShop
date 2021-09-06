@@ -37,4 +37,6 @@ class Order < ApplicationRecord
   def payment_and_shipment_completed?
     payment.completed? && shipment.shipped?
   end
+
+  delegate :email, to: :user, prefix: 'user'
 end
