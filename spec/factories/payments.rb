@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :order do
-    state { 'new' }
-    association :user
+  factory :payment do
+    order { nil }
   end
 end

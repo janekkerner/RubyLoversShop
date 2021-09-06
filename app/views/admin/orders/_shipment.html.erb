@@ -1,0 +1,13 @@
+<div class="col-sm-6">
+  <div class="card mb-4" id="shipment_card">
+  <h4 class="card-header">Shipment</h4>
+    <div class="card-body">
+      <h6 class='cart-title'>Current shipment status: <span class="badge p-2 text-white bg-<%= bootstrap_events_class(shipment.aasm_state.to_s) %>"><%= shipment.aasm_state %></span></h6>
+      <div class="btn-group">
+        <% order_presenter.shipment_permitted_events.each do |name|%>
+          <%= link_to "#{name}", admin_shipment_path(id: shipment.id, event: name), method: :patch, data: {confirm: 'Are you sure?'}, class: "btn btn-outline-#{bootstrap_events_class(name.to_s)}" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

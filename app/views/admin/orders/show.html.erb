@@ -1,0 +1,47 @@
+<div class="card bg <%= bootstrap_order_status_class(order.state.to_s) %> text-white">
+  <h3 class="d-flex justify-content-center align-items-center">Order state: <%= order.state %></h3>
+</div>
+<h2 class="d-flex justify-content-center">Order ID: <%= order.id %></h2>
+<h2 class="d-flex justify-content-center">Order products:</h2>
+<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Product ID</th>
+      <th scope="col">Product name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Product price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% order.order_items.each do |order_item| %>
+      <%= render partial: 'order_item', locals: { order_item: order_item } %>
+    <% end %>
+    <tr>
+      <td colspan=3 >Order total price</td>
+      <td><%= order.total_price %></td>
+    </tr>
+  </tbody>
+</table>
+<div class="row">
+  <%= render partial: 'payment', locals: { payment: payment, order_presenter: order_presenter }%>
+  <%= render partial: 'shipment', locals: { shipment: shipment, order_presenter: order_presenter }%>
+  <%= render partial: 'order_state', locals: { order: order, order_presenter: order_presenter }%>
+  <div class="col-sm-6">
+    <div class="card mb-4">
+      <h4 class="card-header">Order user's data
+      </h4>
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2">E-mail: <%= order.user_email %></h6>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card mb-4">
+      <h4 class="card-header">Order's data
+      </h4>
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2">Created at: <%= order.created_at.strftime("%T %F") %></h6>
+      </div>
+    </div>
+  </div>
+</div>
