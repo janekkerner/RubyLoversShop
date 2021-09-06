@@ -15,5 +15,9 @@ module Admin
     def shipment_permitted_events
       @shipment.aasm.events(permitted: true).map(&:name)
     end
+
+    def order_permitted_events
+      @order.aasm.events(permitted: true).map(&:name)
+    end
   end
 end
