@@ -32,6 +32,7 @@ Style/GuardClause:
 RSpec/MultipleExpectations:
   Exclude:
     - spec/system/**
+    - spec/system/admin/**
     - spec/requests/**/**
 Metrics/AbcSize:
   Exclude:

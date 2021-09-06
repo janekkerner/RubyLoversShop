@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/', to: 'dashboards#index'
     get '/dashboard', to: 'dashboards#index'
-    resources :orders, only: [:index, :show]
+    resources :orders, only: [:index, :show, :update]
     resources :products
+    resources :payments, only: [:update]
+    resources :shipments, only: [:update]
   end
 
   post '/', to: 'pages#home'
