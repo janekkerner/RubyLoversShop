@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin::Orders', type: :request do
-  let!(:admin) { create(:admin_user) }
   let!(:user) { create(:user) }
   let!(:order) { create(:order, user_id: user.id) }
 
@@ -18,6 +17,8 @@ RSpec.describe 'Admin::Orders', type: :request do
     end
 
     context 'when admin signed in' do
+      let!(:admin) { create(:admin_user) }
+
       before do
         sign_in admin
       end
