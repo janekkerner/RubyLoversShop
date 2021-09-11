@@ -11,7 +11,8 @@ class ShoppingCartController < ApplicationController
   end
 
   def add_product_to_cart
-    result = ShoppingCartServices::AddProductToCart.new.call(current_user.shopping_cart, @product)
+    quantity = params[:quantity] || 1
+    result = ShoppingCartServices::AddProductToCart.new.call(current_user.shopping_cart, @product, quantity)
     if result.success?
       flash[:success] = result.message
     else

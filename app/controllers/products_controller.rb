@@ -11,7 +11,8 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @cart = current_user.shopping_cart || current_user.create_shopping_cart
     @presenter = ProductPresenter.new(@product)
-    render :show, locals: { product: @product, presenter: @presenter }
+    render :show, locals: { product: @product, presenter: @presenter, cart: @cart }
   end
 end
