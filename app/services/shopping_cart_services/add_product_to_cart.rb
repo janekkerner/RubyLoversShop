@@ -3,6 +3,7 @@
 module ShoppingCartServices
   class AddProductToCart
     def call(cart:, product:, quantity: 1)
+      quantity ||= 1
       cart_items = cart.cart_items
       cart_item = cart_items.find_by(product_id: product.id)
       if cart_item
