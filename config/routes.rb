@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   get 'cart', to: 'shopping_cart#show', as: 'cart'
-  post 'cart/:id', to: 'shopping_cart#add_product_to_cart', as: 'add_product_to_cart'
-  delete 'cart', to: 'shopping_cart#destroy_cart_items', as: 'clear_shopping_cart'
+  post 'cart/:id', to: 'cart_items#create', as: 'add_product_to_cart'
+  delete 'cart', to: 'shopping_cart#destroy', as: 'clear_shopping_cart'
 
   get 'checkout', to: 'checkouts#show', as: 'checkout'
   post 'checkout', to: 'checkouts#create', as: 'create_checkout'

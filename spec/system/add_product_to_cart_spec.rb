@@ -33,27 +33,33 @@ RSpec.describe 'ShoppingCart#add_product_to_cart', type: :system do
       end
       expect(page).to have_text('You have 1 product in your shopping cart')
     end
+  end
 
-    it 'can add product to his shopping cart from specific product page' do
+  describe 'when logged in user is visiting product page' do
+    before do
+      sign_in user
+    end
+    
+    it 'can add product to his shopping cart' do
       visit "/products/#{product.id}"
-      click_link('Add to cart')
+      click_button('Add to cart')
       expect(page).to have_text('You have 1 product in your shopping cart')
       expect(page).to have_text("Product #{product.name} has been added to your shopping cart")
     end
 
     it 'can add product that is already in cart and increment its quantity' do
       visit "/products/#{product.id}"
-      click_link('Add to cart')
+      click_button('Add to cart')
       visit "/products/#{product.id}"
-      click_link('Add to cart')
+      click_button('Add to cart')
       expect(page).to have_text("Quantity of #{product.name} has been incremented")
     end
 
     it 'can add multiple products to shopping cart' do
       visit "/products/#{product.id}"
-      click_link('Add to cart')
+      click_button('Add to cart')
       visit "/products/#{product2.id}"
-      click_link('Add to cart')
+      click_button('Add to cart')
       expect(page).to have_text('You have 2 products in your shopping cart')
     end
   end
