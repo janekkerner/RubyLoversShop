@@ -5,7 +5,7 @@ module ShoppingCartServices
     def call(cart:, product:, quantity: 1)
       cart_items = cart.cart_items
       cart_item = cart_items.find_by(product_id: product.id)
-      if cart_items.exists?(product_id: product.id) && !cart_item.nil?
+      if cart_item
         increment_cart_item(cart_item)
       else
         create_product_in_cart(cart, product, quantity)
@@ -30,7 +30,7 @@ module ShoppingCartServices
       if cart_product.save
         PayloadObject.new(message: "Product #{product.name} has been added to your shopping cart")
       else
-        PayloadObject.new(errors: cart_product.errors)
+        PayloadObject.new(errors: cart_product.errors.full_messages)
       end
     end
   end
