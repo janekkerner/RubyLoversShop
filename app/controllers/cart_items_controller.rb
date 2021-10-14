@@ -8,10 +8,11 @@ class CartItemsController < ApplicationController
     result = ShoppingCartServices::AddProductToCart.new.call(cart: @cart, product: @product, quantity: quantity)
     if result.success?
       flash[:success] = result.message
+      redirect_to cart_path
     else
       flash[:notice] = result.errors || result.message
+      redirect_back fallback_location: @product
     end
-    redirect_to cart_path
   end
 
   private

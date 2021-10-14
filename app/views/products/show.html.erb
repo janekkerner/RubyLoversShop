@@ -7,7 +7,7 @@
       <h1><%= product.name %></h1>
       <h2><%= number_to_currency product.price %></h2>
       <%= form_with(url: add_product_to_cart_path(product), method: :post, local: true) do |f| %>
-        <%= f.number_field :quantity, step: 1, value: 1, placeholder: 'Quantity' %><br/>
+        <%= f.number_field :quantity, step: 1, value: 1, min: 1, placeholder: 'Quantity' %><br/>
         <%= f.submit 'Add to cart', class: 'btn btn-secondary'%>
       <% end %>
     </div>
