@@ -21,6 +21,14 @@ RSpec.describe 'ShoppingCart#add_product_to_cart', type: :system do
     end
   end
 
+  describe 'when guest is visiting product page' do
+    it 'needs to sign in first, to add product to cart' do
+      visit "/products/#{product.id}"
+      click_button('Add to cart', match: :first)
+      expect(page).to have_text('You need to sign in or sign up before continuing.')
+    end
+  end
+
   describe 'when logged in user is visiting home page' do
     before do
       sign_in user

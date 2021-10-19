@@ -4,6 +4,6 @@ FactoryBot.define do
   factory :cart_item do
     association :product
     association :shopping_cart
-    quantity { nil }
+    quantity { 1 }
   end
 end

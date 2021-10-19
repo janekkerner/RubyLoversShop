@@ -3,11 +3,11 @@
 module ShoppingCartServices
   class AddProductToCart
     def call(cart:, product:, quantity: 1)
-      quantity ||= 1
       cart_items = cart.cart_items
       cart_item = cart_items.find_by(product_id: product.id)
+      quantity = define_quantity(quantity)
       if cart_item
-        increment_cart_item(cart_item)
+        increment_cart_item(cart_item, quantity)
       else
         create_product_in_cart(cart, product, quantity)
       end
@@ -15,8 +15,8 @@ module ShoppingCartServices
 
     private
 
-    def increment_cart_item(cart_item)
-      cart_item.increment(:quantity)
+    def increment_cart_item(cart_item, quantity)
+      cart_item.quantity += quantity
       if cart_item.save
         PayloadObject.new(message: "Quantity of #{cart_item.product_name} has been incremented",
                           payload: { cart_item: cart_item })
@@ -33,6 +33,11 @@ module ShoppingCartServices
       else
         PayloadObject.new(errors: cart_product.errors.full_messages)
       end
+    end
+
+    def define_quantity(quantity)
+      quantity ||= 1
+      quantity.to_i if quantity.to_i.positive?
     end
   end
 end
