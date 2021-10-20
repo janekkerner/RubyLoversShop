@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PayloadObject
   attr_accessor :message, :payload, :errors
 

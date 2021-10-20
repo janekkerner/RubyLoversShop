@@ -58,29 +58,6 @@ RSpec.describe 'ShoppingCarts', type: :request do
         end
           .to change(user.shopping_cart.cart_items, :count)
       end
-
-      it 'can add product to shopping cart with specified quantity' do
-        post "/cart/#{product.id}", params: { quantity: 5 }
-        follow_redirect!
-        expect(user.shopping_cart.cart_items.find_by(product_id: product.id).quantity).to eq(5)
-      end
-
-      it 'increase quantity of cart item if same product is added to shopping cart' do
-        2.times do
-          post "/cart/#{product.id}"
-          follow_redirect!
-        end
-        expect(user.shopping_cart.cart_items.find_by(product_id: product.id).quantity).to eq(2)
-      end
-
-      it 'increase quantity of cart item by given number if product is already in cart' do
-        2.times do
-          post "/cart/#{product.id}"
-        end
-        post "/cart/#{product.id}", params: { quantity: 5 }
-        follow_redirect!
-        expect(user.shopping_cart.cart_items.find_by(product_id: product.id).quantity).to eq(7)
-      end
     end
   end
 end

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe CartItem, type: :model do
   let!(:shopping_cart) { create(:shopping_cart) }
   let!(:product) { create(:product) }
-  let!(:cart_item) { build(:cart_item, shopping_cart: shopping_cart, product: product) } 
+  let!(:cart_item) { build(:cart_item, shopping_cart: shopping_cart, product: product) }
 
   it 'quantity should be greater than 0' do
     cart_item.quantity = 5

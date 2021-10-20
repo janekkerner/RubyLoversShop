@@ -47,7 +47,7 @@ RSpec.describe 'ShoppingCart#add_product_to_cart', type: :system do
     before do
       sign_in user
     end
-    
+
     it 'can add product to his shopping cart' do
       visit "/products/#{product.id}"
       click_button('Add to cart')
@@ -69,6 +69,14 @@ RSpec.describe 'ShoppingCart#add_product_to_cart', type: :system do
       visit "/products/#{product2.id}"
       click_button('Add to cart')
       expect(page).to have_text('You have 2 products in your shopping cart')
+    end
+
+    it 'can add product from product page with specified value' do
+      visit "/products/#{product.id}"
+      fill_in 'quantity', with: 5
+      click_button('Add to cart')
+      expect(page).to have_text("Product #{product.name} has been added to your shopping cart")
+      expect(user.shopping_cart.cart_items.find_by(product_id: product.id).quantity).to be_equal(5)
     end
   end
 end
