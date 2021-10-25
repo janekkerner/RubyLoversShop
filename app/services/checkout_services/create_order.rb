@@ -2,12 +2,15 @@
 
 module CheckoutServices
   class CreateOrder
-    def call(user)
+    def call(user, cart_items_params)
       cart_items = user.shopping_cart.cart_items
       if cart_items.empty?
         OpenStruct.new({ success?: false,
                          message: 'Your shopping cart is empty. Add some products to continue checkout' })
       else
+        cart_items.each do |cart_item|
+          cart_item.quantity = cart_items_params[cart_item.id.to_s][:quantity]
+        end
         create_order(user, cart_items)
       end
     end

@@ -2,11 +2,24 @@
 
 class ShoppingCartController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_cart, only: %i[show destroy]
+  before_action :set_cart, only: %i[show update destroy]
 
   def show
     cart_items = @cart.cart_items
     render :show, locals: { cart_items: cart_items }
+  end
+
+  def update
+    @cart.cart_items.each do |cart_item|
+      cart_item.update(quantity: params[:cart_item][cart_item.id.to_s][:quantity])
+      if cart_item.errors.any?
+        flash[:alert] = "Something went wrong and we couldn't update your shopping cart"
+        break
+      else
+        flash[:notice] = "Shopping cart has been updated"
+      end
+    end
+    redirect_to cart_path
   end
 
   def destroy

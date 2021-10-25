@@ -17,6 +17,16 @@ class CartItemsController < ApplicationController
     end
   end
 
+  def update
+    result = ShoppingCartServices::RecalculateCart.new.call(cart_item: params[:cart_item], quantity: params[:quantity])
+    if result.success?
+      flash[:success] = result.message
+    else
+      flash[:error] = result.errors || result.message
+    end
+    redirect_to cart_path
+  end
+
   private
 
   def set_product
