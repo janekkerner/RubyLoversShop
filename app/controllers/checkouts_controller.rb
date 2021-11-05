@@ -14,8 +14,7 @@ class CheckoutsController < ApplicationController
   end
 
   def create
-    cart_items = params[:cart_item]
-    result = CheckoutServices::CreateOrder.new.call(current_user, cart_items)
+    result = CheckoutServices::CreateOrder.new.call(user: current_user, options: { cart_items: params[:cart_items] })
     if result.success?
       flash[:success] = result.message
       redirect_to checkout_path, locals: { order: result.payload, products: result.payload.order_items }

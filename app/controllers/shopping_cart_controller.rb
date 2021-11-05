@@ -10,14 +10,15 @@ class ShoppingCartController < ApplicationController
   end
 
   def update
-    @cart.cart_items.each do |cart_item|
-      cart_item.update(quantity: params[:cart_item][cart_item.id.to_s][:quantity])
-      if cart_item.errors.any?
-        flash[:alert] = "Something went wrong and we couldn't update your shopping cart"
-        break
-      else
-        flash[:notice] = "Shopping cart has been updated"
-      end
+    result = ShoppingCartServices::RecalculateShoppingCart.new.call(
+      shopping_cart: @cart,
+      cart_items_params: params[:cart_items]
+    )
+    if result.success?
+      flash[:success] = result.message
+    else
+      flash[:notice] = result.message
+      flash[:error] = result.errors&.flatten
     end
     redirect_to cart_path
   end

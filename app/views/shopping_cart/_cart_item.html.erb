@@ -1,6 +1,6 @@
 <% presenter = ProductPresenter.new(cart_item.product) %>
 <tr id="product-id-<%= cart_item.product.id %>">
-  <%= form.fields_for 'cart_item[]', cart_item do |cart_item_form| %>
+  <%= form.fields_for 'cart_items[]', cart_item do |cart_item_form| %>
   <td><%= image_tag presenter.image_attached, size: 100 %></td>
   <td><%= cart_item.product_name %></td>
   <td><%= number_to_currency(cart_item.product_price) %></td>
