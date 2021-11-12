@@ -12,10 +12,10 @@ module ShoppingCartServices
         messages << result.message if result.message
         errors << result.errors if result.errors.any?
       end
-      if cart_items.any? { |item| item.errors.any? }
+      if errors.any?
         PayloadObject.new(message: messages, errors: errors, payload: { cart_items: cart_items })
       else
-        PayloadObject.new(message: messages, payload: { cart_items: cart_items }, errors: errors.join(','))
+        PayloadObject.new(message: messages, payload: { cart_items: cart_items })
       end
     end
   end
