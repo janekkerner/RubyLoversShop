@@ -35,6 +35,23 @@ RSpec.describe 'ShoppingCarts', type: :request do
     end
 
     context 'when user signed in' do
+      let!(:product2) { create(:product) }
+      let(:cart_item) { create(:cart_item, shopping_cart: user.shopping_cart, product: product) }
+      let(:cart_item2) { create(:cart_item, shopping_cart: user.shopping_cart, product: product2) }
+      let(:cart_item3) { create(:cart_item, shopping_cart: user.shopping_cart, product: create(:product)) }
+      let(:cart_items_params) do
+        {
+          cart_items: {
+            cart_item.id => {
+              quantity: '5'
+            },
+            cart_item2.id => {
+              quantity: '10'
+            }
+          }
+        }
+      end
+
       before do
         sign_in user
       end
@@ -57,6 +74,20 @@ RSpec.describe 'ShoppingCarts', type: :request do
           follow_redirect!
         end
           .to change(user.shopping_cart.cart_items, :count)
+      end
+
+      it 'can change quantity of many products in shopping cart' do
+        post '/cart', params: cart_items_params
+        follow_redirect!
+        expect(cart_item.reload.quantity).to eq(cart_items_params[:cart_items][cart_item.id][:quantity].to_i)
+        expect(cart_item2.reload.quantity).to eq(cart_items_params[:cart_items][cart_item2.id][:quantity].to_i)
+      end
+
+      it 'removes product from shopping cart if quantity was set to zero' do
+        expect(CartItem.where(id: cart_item3.id)).to exist
+        post '/cart', params: { cart_items: { cart_item3.id => { quantity: '0' } } }
+        follow_redirect!
+        expect(CartItem.where(id: cart_item3.id)).not_to exist
       end
     end
   end
