@@ -10,8 +10,8 @@ RSpec.describe 'ShoppingCart#update', type: :system do
     driven_by(:rack_test)
   end
 
-  context 'when guest is visiting product page' do
-    it 'needs to sign in first, to add product to cart' do
+  context 'when guest is visiting shopping cart' do
+    it 'needs to sign in first, to see shopping cart' do
       visit '/cart'
       expect(page).to have_text('You need to sign in or sign up before continuing.')
     end
