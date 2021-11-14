@@ -5,5 +5,8 @@ FactoryBot.define do
     association :product
     association :shopping_cart
     quantity { 1 }
+    trait :higher_quantity do
+      quantity { 10 }
+    end
   end
 end
