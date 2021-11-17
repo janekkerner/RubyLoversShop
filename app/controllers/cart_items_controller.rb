@@ -17,6 +17,16 @@ class CartItemsController < ApplicationController
     end
   end
 
+  def delete
+    cart_item = CartItem.find(params[:id])
+    if cart_item.destroy
+      flash[:success] = "Product #{cart_item.product_name} was removed from your shopping cart"
+    else
+      flash[:error] = "Something went wrong and we couldn't remove selected product"
+    end
+    redirect_to cart_path
+  end
+
   private
 
   def set_product
