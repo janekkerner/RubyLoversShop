@@ -25,6 +25,4 @@ class PayloadObject
 
     @message
   end
-
-
 end

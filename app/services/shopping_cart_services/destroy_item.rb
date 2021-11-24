@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ShoppingCartServices
   class DestroyItem
     def call(cart_item:)
