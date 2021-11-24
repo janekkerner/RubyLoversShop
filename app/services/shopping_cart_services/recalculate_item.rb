@@ -3,25 +3,12 @@
 module ShoppingCartServices
   class RecalculateItem
     def call(cart_item:, quantity: nil)
-      old_quantity = cart_item.quantity
-      quantity = define_quantity(quantity)
-      if quantity.to_i.zero?
-        if cart_item.destroy
-          PayloadObject.new(
-            message: "Product #{cart_item.product_name} has been removed from your shopping cart",
-            payload: { cart_item: cart_item }
-          )
-        else
-          PayloadObject.new(
-            message: "Something went wrong and we couldn't delete #{cart_item.product_name} from your shopping cart",
-            errors: cart_item.errors.full_messages,
-            payload: { cart_item: cart_item }
-          )
-        end
-      elsif cart_item.update(quantity: quantity)
-        message = "Quantity of #{cart_item.product_name} has been set to #{quantity}" if old_quantity != quantity.to_i
+      quantity_normalized = define_quantity(quantity)
+      return DestroyItem.new.call(cart_item: cart_item) if zero_quantity?(quantity_normalized)
+
+      if cart_item.update(quantity: quantity_normalized)
         PayloadObject.new(
-          message: message,
+          message: "Quantity of #{cart_item.product_name} has been set to #{quantity_normalized}",
           payload: { cart_item: cart_item }
         )
       else
@@ -35,9 +22,13 @@ module ShoppingCartServices
 
     private
 
+    def zero_quantity?(quantity)
+      quantity.to_i.zero?
+    end
+
     def define_quantity(quantity)
       quantity.to_s if quantity.is_a?(Integer)
-      quantity.presence || 1
+      quantity.presence || '1'
     end
   end
 end

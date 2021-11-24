@@ -3,19 +3,10 @@
     <div class="row">
       <div class="col">
         <% flash.each do |type, msg| %>
-          <% if msg.kind_of?(Array) %>
-            <% msg.each do |message| %>
-              <div class="alert <%= bootstrap_flash_class(type) %> alert-dismissable fade show">
-                <%= message %>
-                <button class="close" data-dismiss="alert">x</button>
-              </div>
-            <% end %>
-          <% else %>
           <div class="alert <%= bootstrap_flash_class(type) %> alert-dismissable fade show">
             <%= msg %>
             <button class="close" data-dismiss="alert">x</button>
           </div>
-          <% end %>
         <% end %>
       </div>
     </div>

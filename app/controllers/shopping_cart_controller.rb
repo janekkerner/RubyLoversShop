@@ -15,10 +15,10 @@ class ShoppingCartController < ApplicationController
       cart_items_params: params[:cart_items]
     )
     if result.success?
-      flash[:success] = result.message
+      flash[:success] = result.message if result.message.present?
     else
       flash[:notice] = result.message
-      flash[:error] = result.errors&.flatten
+      flash[:error] = result.errors
     end
     redirect_to cart_path
   end
