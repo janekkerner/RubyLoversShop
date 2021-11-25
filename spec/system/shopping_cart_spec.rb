@@ -55,10 +55,20 @@ RSpec.describe 'ShoppingCart#update', type: :system do
       expect(page).to have_text("Quantity of #{cart_item2.product_name} has been set to 10")
     end
 
-    it 'will set quantity to 1 if no value was provided' do
+    it 'can fill quantity input with no value and the quantity will be set to 1' do
       fill_in "_cart_items_#{cart_item3.id}_quantity", with: ''
       click_button 'Recalculate'
       expect(page).to have_text("Quantity of #{cart_item3.product_name} has been set to 1")
+    end
+
+    it 'can remove specified product from shopping cart' do
+      expect(page).to have_text(cart_item.product_name)
+      within "#product-id-#{cart_item.product_id}" do
+        click_link 'Remove'
+      end
+      expect(page).to have_text("Product #{cart_item.product_name} has been removed from your shopping cart")
+      visit current_path
+      expect(page).not_to have_text(cart_item.product_name)
     end
   end
 end

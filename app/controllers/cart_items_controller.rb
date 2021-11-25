@@ -17,6 +17,17 @@ class CartItemsController < ApplicationController
     end
   end
 
+  def delete
+    cart_item = CartItem.find(params[:cart_item_id])
+    result = ShoppingCartServices::DestroyItem.new.call(cart_item: cart_item)
+    if result.success?
+      flash[:success] = result.message
+    else
+      flash[:error] = result.errors
+    end
+    redirect_to cart_path
+  end
+
   private
 
   def set_product
