@@ -2,11 +2,25 @@
 
 class ShoppingCartController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_cart, only: %i[show destroy]
+  before_action :set_cart, only: %i[show update destroy]
 
   def show
     cart_items = @cart.cart_items
     render :show, locals: { cart_items: cart_items }
+  end
+
+  def update
+    result = ShoppingCartServices::RecalculateShoppingCart.new.call(
+      shopping_cart: @cart,
+      cart_items_params: params[:cart_items]
+    )
+    if result.success?
+      flash[:success] = result.message if result.message.present?
+    else
+      flash[:notice] = result.message
+      flash[:error] = result.errors
+    end
+    redirect_to cart_path
   end
 
   def destroy

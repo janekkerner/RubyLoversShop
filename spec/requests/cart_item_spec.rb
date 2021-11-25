@@ -33,6 +33,11 @@ RSpec.describe 'CartItem', type: :request do
           expect(response.body).to include("Product #{product.name} has been added to your shopping cart")
         end
 
+        it 'adds product to shopping cart' do
+          request
+          expect(user.shopping_cart.cart_items.find_by(product_id: product.id).quantity).to eq(1)
+        end
+
         it 'increase quantity of cart item if same product is added to shopping cart' do
           request
           post "/cart/#{product.id}"

@@ -19,20 +19,19 @@ RSpec.describe 'Checkouts', type: :system do
     end
 
     it 'can proceed to checkout' do
-      click_link('Checkout', match: :first)
+      click_button('Checkout', match: :first)
       expect(page).to have_text("Order ID: #{user.orders.last.id}")
     end
 
     it 'can see in order summary products that was in shopping cart before' do
       user.shopping_cart.cart_items.create(product_id: product2.id)
-      click_link('Checkout')
-      expect(page).to have_text(product.name.to_s)
+      click_button('Checkout')
       expect(page).to have_text(product2.name.to_s)
     end
 
     it 'cannot create order if shopping cart is empty' do
       user.shopping_cart.cart_items.destroy_all
-      click_link('Checkout')
+      click_button('Checkout')
       expect(page).to have_text('Add some products to continue checkout')
     end
 

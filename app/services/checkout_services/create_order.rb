@@ -2,13 +2,23 @@
 
 module CheckoutServices
   class CreateOrder
-    def call(user)
+    def call(user:, options: {})
+      options = { cart_items: nil }.merge(options)
       cart_items = user.shopping_cart.cart_items
-      if cart_items.empty?
-        OpenStruct.new({ success?: false,
-                         message: 'Your shopping cart is empty. Add some products to continue checkout' })
+      cart_items.each do |cart_item|
+        break if options[:cart_items].nil?
+
+        next if options[:cart_items][cart_item.id.to_s].nil?
+
+        ShoppingCartServices::RecalculateItem.new.call(
+          cart_item: cart_item,
+          quantity: options[:cart_items][cart_item.id.to_s][:quantity]
+        )
+      end
+      if cart_items.reload.empty?
+        PayloadObject.new({ errors: 'Your shopping cart is empty. Add some products to continue checkout' })
       else
-        create_order(user, cart_items)
+        create_order(user, cart_items.reload)
       end
     end
 
@@ -21,10 +31,10 @@ module CheckoutServices
       order.total_price = result.payload
       if order.save
         user.shopping_cart.products.destroy_all
-        OpenStruct.new({ success?: true, message: "Your order with ID: #{order.id} was created", payload: order })
+        PayloadObject.new({ message: "Your order with ID: #{order.id} was created", payload: order })
       else
-        OpenStruct.new({ success?: false, message: "We couldn't create your order. Try again later",
-                         errors: order.errors })
+        PayloadObject.new({ message: "We couldn't create your order. Try again later",
+                            errors: order.errors })
       end
     end
 
