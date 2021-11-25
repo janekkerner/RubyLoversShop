@@ -4,6 +4,8 @@ require 'rails_helper'
 
 # deeper nesting required for specified context
 # rubocop:disable RSpec/NestedGroups
+# Longer block length needed to handle all request methods
+# rubocop:disable Metrics/BlockLength
 
 RSpec.describe 'CartItem', type: :request do
   let!(:user) { create(:user, shopping_cart: create(:shopping_cart)) }
@@ -91,6 +93,11 @@ RSpec.describe 'CartItem', type: :request do
   end
 
   describe 'DELETE /cart/:id' do
+    subject(:request) do
+      delete "/cart/#{cart_item.id}"
+      follow_redirect!
+    end
+
     let!(:cart_item) { create(:cart_item, shopping_cart: user.shopping_cart, product: product) }
 
     context 'when user signed in' do
@@ -99,33 +106,27 @@ RSpec.describe 'CartItem', type: :request do
       end
 
       it 'has success http status' do
-        delete "/cart/#{cart_item.id}"
-        follow_redirect!
+        request
         expect(response).to have_http_status(:success)
       end
 
       it 'renders success notification after removing product from cart' do
-        delete "/cart/#{cart_item.id}"
-        follow_redirect!
+        request
         expect(response.body).to include("Product #{cart_item.product_name} has been removed from your shopping cart")
       end
 
       it 'removes cart item from shopping cart' do
-        expect do
-          delete "/cart/#{cart_item.id}"
-          follow_redirect!
-        end
-          .to change { user.shopping_cart.cart_items.count }.by(-1)
+        expect { request }.to change { user.shopping_cart.cart_items.count }.by(-1)
       end
     end
 
     context 'when user not signed in' do
       it 'has redirects to log in page' do
-        delete "/cart/#{cart_item.id}"
-        follow_redirect!
+        request
         expect(response.body).to include('You need to sign in or sign up before continuing.')
       end
     end
   end
 end
 # rubocop:enable RSpec/NestedGroups
+# rubocop:enable Metrics/BlockLength
