@@ -4,15 +4,26 @@ require 'rails_helper'
 
 RSpec.describe 'Pages', type: :request do
   describe 'GET /' do
-    subject(:request) { get '/' }
-    create_list(:product, 4)
+    subject(:request) { get '/', params: params }
 
-    it 'have ok http status' do
-      expect(request).to have_http_status(:ok)
-    end
+    let(:params) { {} }
+    let(:product) { create(:product) }
+    let(:product2) { create(:product) }
+    let(:product3) { create(:product) }
 
-    it 'have product description' do
-      expect(response.body).to include('This is a place for product description')
+    context 'with filter params provided' do
+      let(:params) { { q: { price_gteq: product.price, price_lteq: product2.price } } }
+
+      it 'have ok http status' do
+        request
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'filter products that belongs only to provided price range' do
+        request
+        expect(response.body).to include(product.name, product2.name)
+        expect(response.body).not_to include(product3.name)
+      end
     end
   end
 end

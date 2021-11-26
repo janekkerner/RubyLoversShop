@@ -49,7 +49,6 @@ RSpec.describe 'Filters', type: :system do
   end
 
   describe 'when user is selecting category and brand' do
-
     it 'see only products that belongs to selected category and brand' do
       visit_path
       select category.name.to_s, from: 'q_category_name_eq'
@@ -66,7 +65,7 @@ RSpec.describe 'Filters', type: :system do
       expect(page).not_to have_text(product2.name)
     end
   end
-  
+
   describe 'when user is providing price range filter' do
     it 'see only products from provided price range' do
       visit_path
