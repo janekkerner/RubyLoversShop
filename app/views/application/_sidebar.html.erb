@@ -8,5 +8,15 @@
     <%= f.label :brand_brand_name_eq, "Brand:" %>
     <%= f.collection_select :brand_brand_name_eq, Brand.all, :brand_name, :brand_name, { include_blank: true }, { class: "form-control w-75" } %>
   </div>
+  <div class="form-row" >
+    <div class="form-group col-md-6">
+      <%= f.label :price_gteq, "Price from" %>
+      <%= f.number_field :price_gteq, class: "form-control w-100" %>
+    </div>
+    <div class="form-group col-md-6">
+      <%= f.label :price_lteq, "Price to" %>
+      <%= f.number_field :price_lteq, class: "form-control w-100" %>
+    </div>
+  </div>
   <%= f.submit "Filter", class: "btn btn-primary w-50" %>
 <% end %>
