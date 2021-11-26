@@ -69,7 +69,12 @@ RSpec.describe 'Filters', type: :system do
   
   describe 'when user is providing price range filter' do
     it 'see only products from provided price range' do
-      visitin
-    end 
+      visit_path
+      fill_in 'q_price_gteq', with: product.price
+      fill_in 'q_price_lteq', with: product2.price - 1
+      click_button 'Filter'
+      expect(page).to have_text(product.name)
+      expect(page).not_to have_text(product2.name)
+    end
   end
 end
