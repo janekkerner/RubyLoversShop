@@ -12,7 +12,7 @@ class ShoppingCartController < ApplicationController
   def update
     result = ShoppingCartServices::RecalculateShoppingCart.new.call(
       shopping_cart: @cart,
-      cart_items_params: params[:cart_items]
+      cart_items_params: cart_items_permited
     )
     if result.success?
       flash[:success] = result.message if result.message.present?
@@ -35,6 +35,10 @@ class ShoppingCartController < ApplicationController
   end
 
   private
+
+  def cart_items_permited
+    params.fetch(:cart_items, {}).permit!
+  end
 
   def set_cart
     @cart = current_user.shopping_cart || current_user.create_shopping_cart

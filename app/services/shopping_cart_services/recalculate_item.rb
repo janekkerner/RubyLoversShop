@@ -3,7 +3,7 @@
 module ShoppingCartServices
   class RecalculateItem
     def call(cart_item:, quantity: nil)
-      quantity_normalized = define_quantity(quantity)
+      quantity_normalized = normalize_quantity(quantity)
       return DestroyItem.new.call(cart_item: cart_item) if zero_quantity?(quantity_normalized)
 
       if cart_item.update(quantity: quantity_normalized)
@@ -26,7 +26,7 @@ module ShoppingCartServices
       quantity.to_i.zero?
     end
 
-    def define_quantity(quantity)
+    def normalize_quantity(quantity)
       quantity.to_s if quantity.is_a?(Integer)
       quantity.presence || '1'
     end
