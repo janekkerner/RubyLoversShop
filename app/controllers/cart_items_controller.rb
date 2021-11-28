@@ -6,8 +6,11 @@ class CartItemsController < ApplicationController
   before_action :set_product, only: %i[create]
 
   def create
-    result = ShoppingCartServices::AddProductToCart.new.call(cart: @cart, product: @product,
-                                                             quantity: params[:quantity])
+    result = ShoppingCartServices::CreateItem.new.call(
+      cart: @cart,
+      product: @product,
+      quantity: params[:quantity]
+    )
     if result.success?
       flash[:success] = result.message
       redirect_to cart_path

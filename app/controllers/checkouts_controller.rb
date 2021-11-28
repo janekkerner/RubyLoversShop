@@ -14,7 +14,7 @@ class CheckoutsController < ApplicationController
   end
 
   def create
-    result = CheckoutServices::CreateOrder.new.call(user: current_user, options: { cart_items: params[:cart_items] })
+    result = CheckoutServices::CreateOrder.new.call(user: current_user, cart_items_params: cart_items_permited_array)
     if result.success?
       flash[:success] = result.message
       redirect_to checkout_path, locals: { order: result.payload, products: result.payload.order_items }
@@ -22,5 +22,9 @@ class CheckoutsController < ApplicationController
       flash[:error] = result.errors || result.message
       redirect_back fallback_location: root_path
     end
+  end
+
+  def cart_items_permited_array
+    params.fetch(:cart_items, {}).permit!
   end
 end
