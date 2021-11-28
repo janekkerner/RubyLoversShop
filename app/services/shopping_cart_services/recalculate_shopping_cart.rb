@@ -8,7 +8,7 @@ module ShoppingCartServices
       @cart_items_params = cart_items_params
 
       initialize_cart_items(shopping_cart)
-      check_item_for_quantity_change
+      check_items_for_quantity_change
       create_response_sentence
       if @errors.any?
         PayloadObject.new(message: @response_message, errors: @errors, payload: { cart_items: @cart_items })
@@ -19,7 +19,7 @@ module ShoppingCartServices
 
     private
 
-    def check_item_for_quantity_change
+    def check_items_for_quantity_change
       @cart_items.each do |cart_item|
         define_old_and_new_quantity(cart_item)
         next if quantity_unchanged?
@@ -31,7 +31,7 @@ module ShoppingCartServices
     end
 
     def add_message_to_array(array:, result:, method:)
-      array << result.send(method)
+      array << result.send(method) if result.send(method).presence
     end
 
     def define_old_and_new_quantity(cart_item)
