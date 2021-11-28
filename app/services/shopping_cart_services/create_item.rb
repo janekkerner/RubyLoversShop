@@ -21,7 +21,7 @@ module ShoppingCartServices
       quantity.to_i if quantity.to_i.positive?
     end
 
-    def update_quantity(cart_item)
+    def update_item_quantity(cart_item)
       cart_item.quantity += @quantity
       if cart_item.save
         PayloadObject.new(message: "Quantity of #{cart_item.product_name} has been incremented",

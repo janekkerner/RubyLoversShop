@@ -3,7 +3,7 @@
 class Order < ApplicationRecord
   include AASM
 
-  validates :total_price, numericality: {greater_than: 0}
+  validates :total_price, numericality: { greater_than: 0 }
 
   belongs_to :user
   has_many :order_items, dependent: :destroy
